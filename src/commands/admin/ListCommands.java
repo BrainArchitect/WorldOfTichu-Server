@@ -1,0 +1,80 @@
+package commands.admin;
+
+import java.io.File;
+
+import clientPackage.Client;
+
+import commands.Command;
+
+public class ListCommands implements Command{
+
+	private static boolean enabled = true;
+	private Client client;
+	
+	public void execute(Client client, String... args){
+		this.client = client;
+		String nam = "./src/commands/";
+	    File aFile = new File(nam);
+	    Process(aFile);
+	}
+
+	private void Process(File aFile) {
+		if(aFile.isFile()){
+			String name = aFile.getName();
+			if (name.substring(name.length()-4).equals("java")){
+				try {
+					if (!name.equals("Command.java") && !name.equals("CommandFactory.java")){
+						String pack = aFile.getPath().replaceAll("\\\\", ".");
+						pack = pack.substring(6, pack.lastIndexOf('.'));
+						Class<?> cl = Class.forName(pack);
+						Command command = (Command) cl.newInstance();
+						String description = command.getDescription();
+						String code = command.getCode();
+						boolean enabled = command.isEnabled();
+						client.send("add-command-details~" + code + "~" + description + "~" + enabled + "~\n");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		else if (aFile.isDirectory()) {
+			File[] listOfFiles = aFile.listFiles();
+			if(listOfFiles!=null) {
+				for (int i = 0; i < listOfFiles.length; i++)
+					Process(listOfFiles[i]);
+			}
+		}
+	}
+
+	@Override
+	public void setEnabled(boolean enabled) {
+		ListCommands.enabled = enabled;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return ListCommands.enabled;
+	}
+
+	@Override
+	public String getDescription() {
+		String name = this.getClass().getName();
+		name = name.substring(name.lastIndexOf('.')+1);
+		String finalName = "";
+		for (int i=0; i<name.length(); i++){
+			if (Character.isUpperCase( name.charAt(i) ))
+				finalName += " ";
+			
+			finalName += name.charAt(i);
+		}
+		return finalName;
+	}
+
+	@Override
+	public String getCode() {
+		return "69a";
+	}
+	
+	
+}
