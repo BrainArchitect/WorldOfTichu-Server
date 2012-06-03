@@ -31,7 +31,7 @@ public class ListCommands implements Command{
 						String description = command.getDescription();
 						String code = command.getCode();
 						boolean enabled = command.isEnabled();
-						client.send("add-command-details~" + code + "~" + description + "~" + enabled + "~\n");
+						client.send("69aR~" + code + "~" + description + "~" + enabled + "~\n");
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

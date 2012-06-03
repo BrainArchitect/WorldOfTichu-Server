@@ -2,6 +2,7 @@ package commands;
 
 import commands.account.*;
 import commands.admin.ListCommands;
+import commands.admin.ServerStatus;
 import commands.contacts.*;
 import commands.customGame.*;
 
@@ -61,6 +62,9 @@ public class CommandFactory {
 		
 		if (commandStr.equals("69a"))
 			return new ListCommands();
+		
+		if (commandStr.equals("69b"))
+			return new ServerStatus();
 		
 		return null;
 	}	

@@ -91,5 +91,7 @@ public class TableManager {
 		}
 	}
 
+	public static int getCustomTablesSize(){ return customTables.size(); }
+	public static int getRankedTablesSize(){ return rankedTables.size(); }
 	
 }
