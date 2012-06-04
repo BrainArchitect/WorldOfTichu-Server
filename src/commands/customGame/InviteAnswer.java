@@ -28,8 +28,7 @@ public class InviteAnswer extends Command {
 		CustomTable table = TableManager.getCustomTable(params[1]);
 		if (table != null && table.isInvitationPending(client) && client.getTable()==null){
 			boolean reply = Boolean.parseBoolean(params[2]);
-			String rep = reply ? "Accepted" : "Declined";
-			table.replyToInvitation(client, rep);
+			table.replyToInvitation(client, reply ? "Accepted" : "Declined");
 			List<Client> clients = table.getAllClients();
 			for (Client c : clients)
 				c.send("3hR~" +client.getInfo().getUsername()+"~"+ reply + "~\n");
