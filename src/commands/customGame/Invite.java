@@ -19,10 +19,12 @@ public class Invite extends Command {
 		Table table = client.getTable();
 		
 		if(invitedClient!=null && table!=null){
-			invitedClient.send("3g1R~"+hostName+"~"+ table.getID()+"~\n");
-			List<Client> clients = table.getAllClients();
-			for(Client c : clients){
-				 c.send("3g2R~"+userName+"~\n");
+			if(table.inviteToTable(invitedClient)){
+				invitedClient.send("3g1R~"+hostName+"~"+ table.getID()+"~\n");
+				List<Client> clients = table.getAllClients();
+				for(Client c : clients){
+					 c.send("3g2R~"+userName+"~\n");
+				}
 			}
 
 		}

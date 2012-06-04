@@ -1,5 +1,6 @@
 package commands.customGame;
 
+import tablePackage.*;
 import clientPackage.Client;
 import commands.Command;
 
@@ -9,7 +10,14 @@ public class StartGame extends Command {
 	
 	@Override
 	public void execute(Client client, String... params) {
-
+		if(!enabled){
+			return;
+		}
+		
+		Table table = client.getTable();
+		if(table!=null && table.isCustomTable() && !table.isStarted()){
+			((CustomTable) table).startGame(client);
+		}
 	}
 
 	@Override

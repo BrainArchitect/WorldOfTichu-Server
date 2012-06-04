@@ -40,7 +40,7 @@ public class CustomTable extends Table {
 				
 				//Send message with the table details to the observer that have now joined this table
 				//*************************************************************************************************
-				String msgTableDetails="3c1R~"+super.getID()+"~"+ c.getInfo().getUsername() +"~"+getNumOfPlayers()+"~"+observers.size()+"~";
+				String msgTableDetails="3c1R~"+super.getID()+"~"+ c.getInfo().getUsername() +"~"+getNumOfPlayers()+"~"+observers.size()+"~"+invitations.size()+"~";
 				for(int sitNo=0;sitNo<4;sitNo++){
 					if(players[sitNo]!=null){
 						msgTableDetails = msgTableDetails + sitNo +"~"+ players[sitNo].getInfo().getUsername()+"~";
@@ -48,6 +48,10 @@ public class CustomTable extends Table {
 				}
 				for(Client client : observers){
 					msgTableDetails = msgTableDetails + client.getInfo().getUsername()+"~";
+				}
+				
+				for(Invitation invitation : invitations){
+					msgTableDetails = msgTableDetails + invitation.client.getInfo().getUsername()+"~" + invitation.reply+"~";
 				}
 				msgTableDetails = msgTableDetails + "\n";	
 				c.send(msgTableDetails);
@@ -164,6 +168,16 @@ public class CustomTable extends Table {
 	public String getID(){
 		return super.getID();
 	} 
+	
+	public void startGame(Client c){
+
+		if(players[0]==c && getNumOfPlayers()==4){
+			started = true;
+			sendMessage("3jR~\n");
+			//MORE CODE NEEDED
+		}
+		
+	}
 	
 	public int getNumOfPlayers(){
 		int sum = 0;

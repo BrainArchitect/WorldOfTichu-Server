@@ -20,23 +20,21 @@ public class InviteAnswer extends Command {
 	
 	@Override
 	public void execute(Client client, String... params) {
-		if (!InviteAnswer.enabled)
+
+		
+		if (!InviteAnswer.enabled || params.length!=3)
 			return;
 		
 		CustomTable table = TableManager.getCustomTable(params[1]);
-		if (table != null) {
+		if (table != null && table.isInvitationPending(client) && client.getTable()==null){
 			boolean reply = Boolean.parseBoolean(params[2]);
-			
-			client.send("3c1R~" + reply + "~\n");
+			String rep = reply ? "Accepted" : "Declined";
+			table.replyToInvitation(client, rep);
 			List<Client> clients = table.getAllClients();
 			for (Client c : clients)
-				c.send("3hR~" + reply + "~\n");
-			
-			if (reply == true){
-				for (Client c : clients){
-					if (c != client)
-						c.send("3c2R~" + reply + "~\n");
-				}
+				c.send("3hR~" +client.getInfo().getUsername()+"~"+ reply + "~\n");
+			if (reply){
+				table.addObserver(client);
 			}
 		}
 	}
