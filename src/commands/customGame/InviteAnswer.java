@@ -1,13 +1,9 @@
 package commands.customGame;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.TreeSet;
 
-import javax.swing.plaf.ListUI;
 
 import tablePackage.CustomTable;
-import tablePackage.Table;
 import tablePackage.TableManager;
 import clientPackage.Client;
 import commands.Command;
@@ -28,17 +24,19 @@ public class InviteAnswer extends Command {
 			return;
 		
 		CustomTable table = TableManager.getCustomTable(params[1]);
-		boolean reply = Boolean.parseBoolean(params[2]);
-		
-		List<Client> clients = table.getAllClients();
-		for (Client c : clients)
-			client.send("3hR~" + reply + "~");
-		
-		if (reply == true){
-			for (Client c : clients){
-				client.send("3c1R~" + reply + "~");
-				if (c != client)
-					client.send("3c2R~" + reply + "~");
+		if (table != null) {
+			boolean reply = Boolean.parseBoolean(params[2]);
+			
+			client.send("3c1R~" + reply + "~\n");
+			List<Client> clients = table.getAllClients();
+			for (Client c : clients)
+				c.send("3hR~" + reply + "~\n");
+			
+			if (reply == true){
+				for (Client c : clients){
+					if (c != client)
+						c.send("3c2R~" + reply + "~\n");
+				}
 			}
 		}
 	}
