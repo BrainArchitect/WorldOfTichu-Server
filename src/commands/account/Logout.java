@@ -8,7 +8,7 @@ import commands.Command;
 
 import clientPackage.Client;
 
-public class Logout implements Command{
+public class Logout extends Command{
 
 	private static boolean enabled = true;
 	
@@ -55,16 +55,7 @@ public class Logout implements Command{
 
 	@Override
 	public String getDescription() {
-		String name = this.getClass().getName();
-		name = name.substring(name.lastIndexOf('.')+1);
-		String finalName = "";
-		for (int i=0; i<name.length(); i++){
-			if (Character.isUpperCase( name.charAt(i) ))
-				finalName += " ";
-			
-			finalName += name.charAt(i);
-		}
-		return finalName;
+		return super.getDescription(this);
 	}
 
 	@Override

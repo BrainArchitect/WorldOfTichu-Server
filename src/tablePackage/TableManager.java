@@ -69,9 +69,9 @@ public class TableManager {
 	}
 	
 	
-	public static synchronized TreeSet<CustomTable> getCustomTables(){
-		return customTables;
-	}
+	//public static synchronized TreeSet<CustomTable> getCustomTables(){
+		//return customTables;
+	//}
 	
 	
 	public static synchronized CustomTable getCustomTable(String tableName){

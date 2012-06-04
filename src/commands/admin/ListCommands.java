@@ -6,7 +6,7 @@ import clientPackage.Client;
 
 import commands.Command;
 
-public class ListCommands implements Command{
+public class ListCommands extends Command{
 
 	private static boolean enabled = true;
 	private Client client;
@@ -15,10 +15,10 @@ public class ListCommands implements Command{
 		this.client = client;
 		String nam = "./src/commands/";
 	    File aFile = new File(nam);
-	    Process(aFile);
+	    process(aFile);
 	}
 
-	private void Process(File aFile) {
+	private void process(File aFile) {
 		if(aFile.isFile()){
 			String name = aFile.getName();
 			if (name.substring(name.length()-4).equals("java")){
@@ -42,7 +42,7 @@ public class ListCommands implements Command{
 			File[] listOfFiles = aFile.listFiles();
 			if(listOfFiles!=null) {
 				for (int i = 0; i < listOfFiles.length; i++)
-					Process(listOfFiles[i]);
+					process(listOfFiles[i]);
 			}
 		}
 	}
@@ -59,16 +59,7 @@ public class ListCommands implements Command{
 
 	@Override
 	public String getDescription() {
-		String name = this.getClass().getName();
-		name = name.substring(name.lastIndexOf('.')+1);
-		String finalName = "";
-		for (int i=0; i<name.length(); i++){
-			if (Character.isUpperCase( name.charAt(i) ))
-				finalName += " ";
-			
-			finalName += name.charAt(i);
-		}
-		return finalName;
+		return super.getDescription(this);
 	}
 
 	@Override
