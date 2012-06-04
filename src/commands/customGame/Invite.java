@@ -1,5 +1,6 @@
 package commands.customGame;
 
+import tablePackage.*;
 import clientPackage.Client;
 import commands.Command;
 
@@ -9,7 +10,19 @@ public class Invite extends Command {
 	
 	@Override
 	public void execute(Client client, String... params) {
-		// TODO Auto-generated method stub
+		
+		String userName = params[1];
+		Client invitedClient = Client.getClient(userName);
+		if(invitedClient!=null){
+			Table table = client.getTable();
+			if(table!=null && table.isCustomTable()){
+				 CustomTable temp = ((CustomTable) table)
+
+			}
+		}
+		
+		
+		
 
 	}
 

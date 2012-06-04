@@ -115,9 +115,12 @@ public class Client implements Comparable<Client>{
 	}
 	
 	
-	public synchronized TreeSet<Client> getOnlineContacts(){
+	public TreeSet<Client> getOnlineContacts(){
 		return onlineContacts;
 	}
+	
+
+	
 	
 	public synchronized void removeOnlineContact(Client client){
 		onlineContacts.remove(client);

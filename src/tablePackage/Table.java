@@ -1,5 +1,7 @@
 package tablePackage;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.TreeSet;
 
 import clientPackage.Client;
@@ -42,6 +44,21 @@ public abstract class Table implements Comparable<Table>{
 	
 	public abstract boolean addObserver(Client c);
 	public abstract void remove(Client c);
+
+	public Client[] getPlayers() {
+		return players;
+	}
+
+	public TreeSet<Client> getObservers() {
+		return observers;
+	}
+	
+	 public List<Client> getAllClients(){
+		  List<Client> list = Arrays.asList(players);
+		  list.addAll(observers);
+		  return list;
+	}
+	
 	
 
 	
