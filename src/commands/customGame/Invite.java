@@ -1,5 +1,7 @@
 package commands.customGame;
 
+import java.util.List;
+
 import tablePackage.*;
 import clientPackage.Client;
 import commands.Command;
@@ -12,18 +14,18 @@ public class Invite extends Command {
 	public void execute(Client client, String... params) {
 		
 		String userName = params[1];
+		String hostName = client.getInfo().getUsername();
 		Client invitedClient = Client.getClient(userName);
-		if(invitedClient!=null){
-			Table table = client.getTable();
-			if(table!=null && table.isCustomTable()){
-				 CustomTable temp = ((CustomTable) table)
-
+		Table table = client.getTable();
+		
+		if(invitedClient!=null && table!=null){
+			invitedClient.send("3g1R~"+hostName+"~"+ table.getID()+"~\n");
+			List<Client> clients = table.getAllClients();
+			for(Client c : clients){
+				 c.send("3g2R~"+userName+"~\n");
 			}
-		}
-		
-		
-		
 
+		}
 	}
 
 	@Override

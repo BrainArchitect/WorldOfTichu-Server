@@ -29,7 +29,11 @@ public class ReaderThread extends Thread{
 				System.err.println(input);
 				String[] params = input.split("~");
 				Command command = CommandFactory.createCommand(params[0]);
-				command.execute(client, params);
+				if(command!=null){
+					command.execute(client, params);
+				}else{
+					System.err.println("Uknown command :"+ input);
+				}
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
