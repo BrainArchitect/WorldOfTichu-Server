@@ -11,6 +11,7 @@ import clientPackage.Client;
 public class Logout extends Command{
 
 	private static boolean enabled = true;
+	private static int counter = 0;
 	
 	/**
 	 * IMPLEMENTS THE LOGOUT REQUIREMENT <br><br>
@@ -55,5 +56,15 @@ public class Logout extends Command{
 	@Override
 	public String getCode() {
 		return "1c";
+	}
+
+	@Override
+	public void increaseCounter() {
+		counter++;
+	}
+
+	@Override
+	public long getCounter() {
+		return counter;
 	}
 }

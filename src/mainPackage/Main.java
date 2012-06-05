@@ -17,7 +17,7 @@ public class Main {
 			System.out.println("Can't create listening socket on port " + listeningPort);
 			System.exit(1);
 		}
-		
+		new ExitPoll().start();
 		filotasTestingCodeArea();
 		//okanTestingCodeArea();
 		

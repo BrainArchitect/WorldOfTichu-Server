@@ -8,6 +8,7 @@ import clientPackage.Client;
 public class RemoveContact extends Command{
 
 	private static boolean enabled = true;
+	private static int counter = 0;
 	
 	/**
 	 * Implements 2b requirement
@@ -45,5 +46,15 @@ public class RemoveContact extends Command{
 	@Override
 	public String getCode() {
 		return "2b";
+	}
+
+	@Override
+	public void increaseCounter() {
+		counter++;
+	}
+
+	@Override
+	public long getCounter() {
+		return counter;
 	}
 }

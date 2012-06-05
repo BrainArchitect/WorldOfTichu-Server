@@ -31,6 +31,7 @@ public class ReaderThread extends Thread{
 				Command command = CommandFactory.createCommand(params[0]);
 				if(command!=null && command.isEnabled()){
 					command.execute(client, params);
+					command.increaseCounter();
 				}else{
 					System.err.println("Uknown command :"+ input);
 				}

@@ -9,6 +9,7 @@ import clientPackage.Info;
 public class AddInvitationReply extends Command{
 
 	private static boolean enabled = true;
+	private static int counter = 0;
 	
 	/**
 	 * PART OF THE ADD CONTACT REQUIREMENT <br><br>
@@ -95,5 +96,15 @@ public class AddInvitationReply extends Command{
 	@Override
 	public String getCode() {
 		return "2a1";
+	}
+
+	@Override
+	public void increaseCounter() {
+		counter++;
+	}
+
+	@Override
+	public long getCounter() {
+		return counter;
 	}
 }

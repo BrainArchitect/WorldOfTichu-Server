@@ -9,6 +9,7 @@ import clientPackage.Info;
 public class AddInvitation extends Command{
 
 	private static boolean enabled = true;
+	private static int counter = 0;
 	
 	/**
 	 * PART OF THE ADD CONTACT REQUIREMENT <br><br>
@@ -75,5 +76,17 @@ public class AddInvitation extends Command{
 	@Override
 	public String getCode() {
 		return "2a";
+	}
+
+
+	@Override
+	public void increaseCounter() {
+		counter++;
+	}
+
+
+	@Override
+	public long getCounter() {
+		return counter;
 	}
 }

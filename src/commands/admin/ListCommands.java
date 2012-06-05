@@ -6,9 +6,10 @@ import clientPackage.Client;
 
 import commands.Command;
 
-public class ListCommands extends Command{
+public class ListCommands extends Command {
 
 	private static boolean enabled = true;
+	private static int counter = 0;
 	private Client client;
 	
 	public void execute(Client client, String... args){
@@ -60,6 +61,16 @@ public class ListCommands extends Command{
 	@Override
 	public String getCode() {
 		return "69a";
+	}
+
+	@Override
+	public void increaseCounter() {
+		counter++;
+	}
+
+	@Override
+	public long getCounter() {
+		return counter;
 	}
 	
 	
