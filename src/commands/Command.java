@@ -4,11 +4,8 @@ import clientPackage.Client;
 
 public abstract class Command {
 	
-	
-	public abstract void execute(Client client, String... params);
-	public  abstract void setEnabled(boolean enabled);
-	public abstract boolean isEnabled();
-
+	public abstract void increaseCounter();	
+	public abstract long getCounter();
 	
 	public String getDescription() {
 		String name = this.getClass().getName();
@@ -24,4 +21,7 @@ public abstract class Command {
 	}
 	
 	public abstract String getCode();
+	public abstract void execute(Client client, String... params);
+	public  abstract void setEnabled(boolean enabled);
+	public abstract boolean isEnabled();
 }

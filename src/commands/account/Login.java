@@ -11,6 +11,7 @@ import clientPackage.Info;
 public class Login extends Command{
 
 	private static int limit = 1000;
+	private static int counter = 0;
 	private static boolean enabled = true;
 	
 	/**
@@ -134,5 +135,15 @@ public class Login extends Command{
 	@Override
 	public String getCode() {
 		return "1b";
+	}
+
+	@Override
+	public void increaseCounter() {
+		counter++;
+	}
+
+	@Override
+	public long getCounter() {
+		return counter;
 	}
 }

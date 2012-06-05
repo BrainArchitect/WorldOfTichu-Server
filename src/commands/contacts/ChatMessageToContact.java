@@ -6,6 +6,7 @@ import clientPackage.Client;
 public class ChatMessageToContact extends Command{
 
 	private static boolean enabled = true;
+	private static int counter = 0;
 	
 	/**
 	 * Implements 2f requirement
@@ -38,5 +39,15 @@ public class ChatMessageToContact extends Command{
 	@Override
 	public String getCode() {
 		return "2f";
+	}
+
+	@Override
+	public void increaseCounter() {
+		counter++;
+	}
+
+	@Override
+	public long getCounter() {
+		return counter;
 	}
 }

@@ -7,6 +7,7 @@ import commands.Command;
 public class StartGame extends Command {
 
 	private static boolean enabled = true;
+	private static int counter = 0;
 	
 	@Override
 	public void execute(Client client, String... params) {
@@ -32,5 +33,15 @@ public class StartGame extends Command {
 	@Override
 	public String getCode() {
 		return "3j";
+	}
+
+	@Override
+	public void increaseCounter() {
+		counter++;
+	}
+
+	@Override
+	public long getCounter() {
+		return counter;
 	}
 }

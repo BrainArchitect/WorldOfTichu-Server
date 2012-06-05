@@ -17,6 +17,7 @@ public class InviteAnswer extends Command {
 	 */
 	
 	private static boolean enabled = true;
+	private static int counter = 0;
 	
 	@Override
 	public void execute(Client client, String... params) {
@@ -51,6 +52,16 @@ public class InviteAnswer extends Command {
 	@Override
 	public String getCode() {
 		return "3h";
+	}
+	
+	@Override
+	public void increaseCounter() {
+		counter++;
+	}
+
+	@Override
+	public long getCounter() {
+		return counter;
 	}
 
 }

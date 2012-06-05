@@ -7,6 +7,7 @@ import commands.Command;
 public class SendTableChatMessage extends Command {
 
 	private static boolean enabled = true;
+	private static int counter = 0;
 	
 	@Override
 	public void execute(Client client, String... params) {
@@ -34,4 +35,13 @@ public class SendTableChatMessage extends Command {
 		return "3i";
 	}
 
+	@Override
+	public void increaseCounter() {
+		counter++;
+	}
+
+	@Override
+	public long getCounter() {
+		return counter;
+	}
 }

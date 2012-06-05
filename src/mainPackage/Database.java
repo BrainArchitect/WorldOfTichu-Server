@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Calendar;
+import java.util.Scanner;
 import java.util.TreeSet;
 
 import clientPackage.Info;
@@ -54,8 +56,8 @@ public class Database {
 		try{
 			Connection con = createConnection();
 			Statement statement = con.createStatement();
-			statement.executeUpdate("INSERT INTO clients (username, password, email, nationality) VALUES ('" 
-					+ info.getUsername() + "','" + info.getPassword() + "','" + info.getEmail() + "','"+ info.getNationality() +"')");
+			statement.executeUpdate("INSERT INTO clients (username, password, email, nationality, last_login) VALUES ('" 
+					+ info.getUsername() + "','" + info.getPassword() + "','" + info.getEmail() + "','"+ info.getNationality() +"','')");
 			return true;
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -296,5 +298,63 @@ public class Database {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-	}	
+	}
+	
+	public static void registerStats(String stats){
+		Scanner scanner = new Scanner(stats.toLowerCase());
+		scanner.useDelimiter("~");
+
+		String fields = "date_str";
+		String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)).substring(2, 4);
+		String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1);
+		if (month.length() == 1)
+			month = "0" + month;
+		String day = String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+		if (day.length() == 1)
+			day = "0" + day;
+		String hour = String.valueOf(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+		if (hour.length() == 1)
+			hour = "0" + hour;
+		String values = year + month + day + hour;
+				
+		Connection con = null;
+		Statement statement = null;
+		try{
+			con = createConnection();
+			statement = con.createStatement();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (con != null && statement != null){
+			while (scanner.hasNext()){
+				String fieldName = scanner.next();
+				String value = scanner.next();
+				String subSQL = "SHOW COLUMNS FROM serverstat LIKE '" + fieldName + "'";
+	
+				fields += ", " + fieldName;
+				values += ", " + value;
+				
+				try {				
+					ResultSet resultSet = statement.executeQuery(subSQL);
+					resultSet.last();
+					if (resultSet.getRow() == 0)
+						statement.executeUpdate("ALTER TABLE serverstat ADD " + fieldName + " INT");
+					
+					resultSet.close();
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			String sql = "INSERT INTO serverstat (" + fields + ") VALUES (" + values + ")";
+			System.out.println(sql);
+			try {
+				statement.executeUpdate(sql);
+				statement.close();
+				con.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
