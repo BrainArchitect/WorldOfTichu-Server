@@ -127,10 +127,8 @@ public class CustomTable extends Table {
 			observers.remove(c);
 			players[sitNo]= c;
 			
-			String message = "3d1R~"+sitNo+"~"+c.getInfo().getUsername()+"~\n";
-			c.send(message);
-			message = "3d2R~"+sitNo+"~"+c.getInfo().getUsername()+"~\n";
-			this.sendMessageBut(message,c);
+			String message = "3dR~"+sitNo+"~"+c.getInfo().getUsername()+"~\n";
+			this.sendMessage(message);
 
 			message = "3uR~"+super.getID()+"~"+this.getNumOfPlayers()+"~\n";
 			TableManager.tableValuesUpdated(message);
@@ -148,8 +146,7 @@ public class CustomTable extends Table {
 			if(players[sitNo]==c){
 				observers.add(c);
 				players[sitNo]= null;
-				c.send("3e1R~"+sitNo+"~"+c.getInfo().getUsername()+"~\n");
-				this.sendMessageBut("3e2R~"+sitNo+"~"+c.getInfo().getUsername()+"~\n",c);
+				this.sendMessage("3eR~"+sitNo+"~"+c.getInfo().getUsername()+"~\n");
 				TableManager.tableValuesUpdated("3uR~"+super.getID()+"~"+this.getNumOfPlayers()+"~\n");
 				return true;
 			}

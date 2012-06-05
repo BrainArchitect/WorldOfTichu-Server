@@ -19,8 +19,7 @@ public class Game {
 	private ArrayList<Card>[] cardLists ;
 	
 	private int wish;
-	private boolean dragon;
-	
+	private boolean dragonPlayed;
 	//Seat of player that has the dragon
 	private int dragonMasterSeat;
 	
@@ -34,7 +33,7 @@ public class Game {
 	//0-no tichu
 	//1-small tichu
 	//2-large tichu
-
+	private int tichu[];
 	
 	private boolean endOfHand;
 	private boolean endOfGame;
@@ -53,8 +52,7 @@ public class Game {
 	}	
 	
 	public void start(){
-		deck.shuffle();
-		this.dealCards(8);			
+		reset();
 	}
 
 
@@ -65,10 +63,14 @@ public class Game {
 		this.continueCounter = 0;
 		this.exchangeCounter = 0;
 		this.wish = 0;
-		this.dragon = false;
+		this.dragonPlayed = false;
 		this.activePlayers = 4;
 		this.endOfHand = false;
 		this.endOfGame = false;
+		
+		deck.shuffle();
+		this.dealCards(8);
+	
 	}
 	
 
@@ -118,12 +120,12 @@ public class Game {
 
 
 	public synchronized void tossCardPatern(int seatNo, ArrayList<String> anyCards){
-		dragon = false;
+		dragonPlayed = false;
 		CardPatternFactory factory = new CardPatternFactory();
 		CardPattern cardPattern = factory.createCardPattern(toCards(seatNo, anyCards));
 
 		if (cardPattern.isOneCardPattern() && cardPattern.getCard(0).isDragon()){
-			dragon = true;
+			dragonPlayed = true;
 			dragonMasterSeat = seatNo;
 		}
 
@@ -131,6 +133,7 @@ public class Game {
 				
 		int currentPlayerSeat = seatNo;	
 		nextPlayerSeat = NEXT_SEAT[currentPlayerSeat];
+		
 					
 		passes = 0;
 	}
@@ -148,11 +151,11 @@ public class Game {
 		int activePlayers = 0;
 		
 		if(passes == activePlayers-1){	
-			if (dragon){
+			if (dragonPlayed){
 				
 			}else{
 
-	
+				
 			}
 		}
 		
@@ -214,8 +217,8 @@ public class Game {
 					team2points += 200;
 					endOfHand= true;
 				}
-				
-				/*if(endOfHand){
+				/*
+				if(endOfHand){
 					int sign[]= new int[4];
 					for(int i=0;i<4;i++){
 						if(tichuMastersSeat[0]==i){
