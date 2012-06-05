@@ -1,8 +1,8 @@
 package cards;
 
-public class Dog extends Card{
+public class Dogs extends Card{
 
-	public Dog(int value, int color) {
+	public Dogs(int value, int color) {
 		super(value, color);
 	}
 

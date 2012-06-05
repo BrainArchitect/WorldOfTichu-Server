@@ -58,5 +58,14 @@ public class Card implements Comparable<Card>{
 			return true;
 		}
 		return false;	
-	}	
+	}
+	
+	public String toString(){
+		String temp = "";
+		if(String.valueOf(value).length() == 1)
+			temp = "0";
+		
+		temp = temp + String.valueOf(value) + String.valueOf(color);
+		return temp;
+	}
 }

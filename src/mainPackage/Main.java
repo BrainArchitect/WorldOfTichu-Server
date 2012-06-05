@@ -2,7 +2,6 @@ package mainPackage;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-
 import clientPackage.Client;
 
 
@@ -57,7 +56,7 @@ public class Main {
 		Database.emptyTheDatabase();
 		Database.initDatabaseForTesting();
 		Database.printUsernames();
-		
+
 	}
 	
 	
