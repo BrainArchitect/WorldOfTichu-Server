@@ -29,7 +29,7 @@ public class ReaderThread extends Thread{
 				System.err.println(input);
 				String[] params = input.split("~");
 				Command command = CommandFactory.createCommand(params[0]);
-				if(command!=null){
+				if(command!=null && command.isEnabled()){
 					command.execute(client, params);
 				}else{
 					System.err.println("Uknown command :"+ input);

@@ -10,10 +10,8 @@ public abstract class Command {
 	public abstract boolean isEnabled();
 
 	
-	public abstract String getDescription();
-	
-	public String getDescription(Command command) {
-		String name = command.getClass().getName();
+	public String getDescription() {
+		String name = this.getClass().getName();
 		name = name.substring(name.lastIndexOf('.')+1);
 		String finalName = "";
 		for (int i=0; i<name.length(); i++){

@@ -14,8 +14,7 @@ public class RemoveContact extends Command{
 	 */
 	@Override
 	public void execute(Client client, String... params) {
-		if (!RemoveContact.enabled)
-			return;
+
 		String contactUsernameToBeRemoved=params[1];
 		boolean success = Database.deleteFriendship(client.getInfo().getUsername(), contactUsernameToBeRemoved);
 		
@@ -42,10 +41,6 @@ public class RemoveContact extends Command{
 		RemoveContact.enabled = enabled;
 	}
 
-	@Override
-	public String getDescription() {
-		return super.getDescription(this);
-	}
 
 	@Override
 	public String getCode() {

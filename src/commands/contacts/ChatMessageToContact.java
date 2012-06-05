@@ -12,9 +12,7 @@ public class ChatMessageToContact extends Command{
 	 */
 	@Override
 	public void execute(Client sourceClient, String... params) {
-		if (!ChatMessageToContact.enabled)
-			return;
-		
+	
 		String sourceUsername = sourceClient.getInfo().getUsername();
 		String targetUsername = params[1];
 		Client targetClient = Client.getClient(targetUsername);
@@ -36,10 +34,6 @@ public class ChatMessageToContact extends Command{
 		ChatMessageToContact.enabled = enabled;
 	}
 
-	@Override
-	public String getDescription() {
-		return super.getDescription(this);
-	}
 
 	@Override
 	public String getCode() {

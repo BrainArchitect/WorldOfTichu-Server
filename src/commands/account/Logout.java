@@ -26,8 +26,6 @@ public class Logout extends Command{
 	 * 
 	 */
 	public void execute(Client client, String... params) {
-		if (!enabled)
-			return;
 
 		TreeSet<Client> onlineContacts = client.getOnlineContacts();
 		for(Client aContact: onlineContacts){
@@ -53,10 +51,6 @@ public class Logout extends Command{
 		Logout.enabled = enabled;
 	}
 
-	@Override
-	public String getDescription() {
-		return super.getDescription(this);
-	}
 
 	@Override
 	public String getCode() {

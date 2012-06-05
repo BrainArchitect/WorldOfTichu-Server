@@ -28,10 +28,6 @@ public class GetUp extends Command {
 		return GetUp.enabled;
 	}
 
-	@Override
-	public String getDescription() {
-		return super.getDescription(this);
-	}
 
 	@Override
 	public String getCode() {

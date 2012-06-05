@@ -28,10 +28,6 @@ public class ServerStatus extends Command {
 		return ServerStatus.enabled;
 	}
 
-	@Override
-	public String getDescription() {
-		return super.getDescription(this);
-	}
 	
 	@Override
 	public String getCode() {

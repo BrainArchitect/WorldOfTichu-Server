@@ -28,10 +28,6 @@ public class CreateTable extends Command {
 		return CreateTable.enabled;
 	}
 
-	@Override
-	public String getDescription() {
-		return super.getDescription(this);
-	}
 
 	@Override
 	public String getCode() {

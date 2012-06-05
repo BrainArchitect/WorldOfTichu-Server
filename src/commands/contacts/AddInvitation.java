@@ -32,8 +32,6 @@ public class AddInvitation extends Command{
 	 */
 	@Override
 	public void execute(Client sourceClient, String... params) {
-		if (!AddInvitation.enabled)
-			return;
 		
 		String targetUsername = params[1];
 		
@@ -73,13 +71,6 @@ public class AddInvitation extends Command{
 	public void setEnabled(boolean enabled) {
 		AddInvitation.enabled = enabled;
 	}
-
-
-	@Override
-	public String getDescription() {
-		return super.getDescription(this);
-	}
-
 
 	@Override
 	public String getCode() {

@@ -49,11 +49,6 @@ public class InviteAnswer extends Command {
 	}
 
 	@Override
-	public String getDescription() {
-		return super.getDescription(this);
-	}
-
-	@Override
 	public String getCode() {
 		return "3h";
 	}

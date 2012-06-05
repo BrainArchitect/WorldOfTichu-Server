@@ -28,10 +28,6 @@ public class SitDown extends Command {
 		SitDown.enabled = enabled;
 	}
 
-	@Override
-	public String getDescription() {
-		return super.getDescription(this);
-	}
 
 	@Override
 	public String getCode() {

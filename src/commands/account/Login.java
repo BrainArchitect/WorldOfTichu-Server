@@ -39,7 +39,7 @@ public class Login extends Command{
 	 * 
 	 */
 	public void execute(Client client, String... params) {
-		if (!enabled || Client.getClientsSize() >= limit)
+		if (Client.getClientsSize() >= limit)
 			return;
 		
 	
@@ -129,11 +129,6 @@ public class Login extends Command{
 	@Override
 	public void setEnabled(boolean enabled) {
 		Login.enabled = enabled;
-	}
-
-	@Override
-	public String getDescription() {
-		return super.getDescription(this);
 	}
 
 	@Override

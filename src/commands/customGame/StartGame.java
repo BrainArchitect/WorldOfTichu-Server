@@ -10,9 +10,7 @@ public class StartGame extends Command {
 	
 	@Override
 	public void execute(Client client, String... params) {
-		if(!enabled){
-			return;
-		}
+
 		
 		Table table = client.getTable();
 		if(table!=null && table.isCustomTable() && !table.isStarted()){
@@ -30,10 +28,6 @@ public class StartGame extends Command {
 		StartGame.enabled = enabled;
 	}
 
-	@Override
-	public String getDescription() {
-		return super.getDescription(this);
-	}
 
 	@Override
 	public String getCode() {
