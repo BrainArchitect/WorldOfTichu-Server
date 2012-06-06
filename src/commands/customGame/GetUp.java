@@ -16,7 +16,6 @@ public class GetUp extends Command {
 		if(t!=null && t.isCustomTable()){
 			((CustomTable) t).smnGotUp(client);
 		}
-
 	}
 
 	@Override
