@@ -3,6 +3,8 @@ package mainPackage;
 import java.io.File;
 import java.util.Calendar;
 
+import clientPackage.Client;
+
 import commands.Command;
 
 public class ExitPoll extends Thread{
@@ -19,7 +21,21 @@ public class ExitPoll extends Thread{
 					
 					statToFlush = "";
 					process(new File("./src/commands/"));
-					Database.registerStats(statToFlush);
+					
+					Calendar now = Calendar.getInstance();
+					String year = String.valueOf(now.get(Calendar.YEAR)).substring(2, 4);
+					String month = String.valueOf(now.get(Calendar.MONTH)+1);
+					if (month.length() == 1)
+						month = "0" + month;
+					String day = String.valueOf(now.get(Calendar.DAY_OF_MONTH));
+					if (day.length() == 1)
+						day = "0" + day;
+					String hour = String.valueOf(now.get(Calendar.HOUR_OF_DAY));
+					if (hour.length() == 1)
+						hour = "0" + hour;
+					String dateStr = year + month + day + hour;
+					
+					Database.registerStats(dateStr, "totalclients~" + Client.getClientsSize() + "~" + statToFlush);
 				}
 				synchronized (this) {
 					this.wait(interval);

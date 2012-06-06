@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Calendar;
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -300,22 +299,12 @@ public class Database {
 		}
 	}
 	
-	public static void registerStats(String stats){
+	public static void registerStats(String dateStr, String stats){
 		Scanner scanner = new Scanner(stats.toLowerCase());
 		scanner.useDelimiter("~");
 
 		String fields = "date_str";
-		String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)).substring(2, 4);
-		String month = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1);
-		if (month.length() == 1)
-			month = "0" + month;
-		String day = String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-		if (day.length() == 1)
-			day = "0" + day;
-		String hour = String.valueOf(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
-		if (hour.length() == 1)
-			hour = "0" + hour;
-		String values = year + month + day + hour;
+		String values = dateStr;
 				
 		Connection con = null;
 		Statement statement = null;

@@ -1,6 +1,7 @@
 package tablePackage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import cards.*;
 
@@ -14,21 +15,19 @@ public class Deck {
 	 */
 	public Deck(){		
 		cards = new ArrayList<Card>();
-
-		
-		//Create all normal cards and add them to the List of Cards
+	
+		// Insert all normal cards and add them to the List of Cards
 		for(int i=2; i<=14; i++){
 			for(int j=0; j<4; j++){
 				cards.add(new Card(i,j));
 			}
 		}
 		
+		// Insert special cards to deck.
 		cards.add(new Dragon(16,4));
 		cards.add(new Phoenix(15,4));
 		cards.add(new Dogs(-1,4));
 		cards.add(new Phoenix(1,4));
-		
-
 	}	
 	
 	/**
@@ -36,18 +35,8 @@ public class Deck {
 	 * the initial position of cards.
 	 */
 	public void shuffle(){
-
+		Collections.shuffle(cards);
 		offset = 0;
-		int num;
-		ArrayList <Card> shuffledCards = new ArrayList <Card>();
-		int counter=0;
-		while(!cards.isEmpty()){
-			num = (int) (Math.random()*(56-counter));
-			shuffledCards.add(cards.remove(num));
-			counter++;
-		}
-		cards=shuffledCards;
-
 	}
 	
 	public ArrayList<Card> next(int limit){
