@@ -42,6 +42,9 @@ public class CommandFactory {
 		if (commandStr.equals("3e"))
 			return new GetUp();
 		
+		if (commandStr.equals("3e1"))
+			return new ForceGetUp();
+		
 		if (commandStr.equals("3f"))
 			return new LeaveTable();
 		
