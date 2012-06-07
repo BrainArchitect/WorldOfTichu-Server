@@ -20,9 +20,9 @@ public class ForceGetUp extends Command {
 		Client forcedClient = Client.getClient(params[1]);
 		if (forcedClient != null){
 			CustomTable table = (CustomTable) client.getTable();
-			if (table != null)
+			if (table != null){
 				table.smnGotUp(forcedClient);
-			forcedClient.send("3e1R~\n");
+			}
 		}
 	}
 	

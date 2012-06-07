@@ -14,7 +14,7 @@ import clientPackage.Statistics;
 public class Database {
 	private static final String URL = "jdbc:mysql://localhost/wot";
 	private static final String USERNAME = "root";
-	private static final String PASSWORD = "";
+	private static final String PASSWORD = "ly6adywe";
 
 	
 	/**
