@@ -26,15 +26,20 @@ public class ReaderThread extends Thread{
 		try{
 			while (true){
 				String input = in.readLine();
-				System.err.println(input);
-				String[] params = input.split("~");
-				Command command = CommandFactory.createCommand(params[0]);
-				if(command!=null && command.isEnabled()){
-					command.execute(client, params);
-					command.increaseCounter();
+				if(input!=null){
+					System.err.println(input);
+					String[] params = input.split("~");
+					Command command = CommandFactory.createCommand(params[0]);
+					if(command!=null && command.isEnabled()){
+						command.execute(client, params);
+						command.increaseCounter();
+					}else{
+						System.err.println("Uknown command :"+ input);
+					}
 				}else{
-					System.err.println("Uknown command :"+ input);
+					throw new NullPointerException();
 				}
+			
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
