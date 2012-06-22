@@ -1,13 +1,13 @@
-package cards.patterns;
+package cards;
 import cards.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class FullHouseCardPattern extends CardPattern{
-
-	public FullHouseCardPattern (ArrayList <Card> c){
+public class StraightCardPattern extends CardPattern{
+	
+	public StraightCardPattern (ArrayList <Card> c){
 
 		//Sorting the ArrayList from smaller to bigger to facilitate
 		//the checks that occur later
@@ -19,18 +19,22 @@ public class FullHouseCardPattern extends CardPattern{
 
 	public int compareTo(CardPattern other) {
 
-		
+
 		if(other==null){
 			return 1;
 		}
-
-		if (other.isFullHouseCardPattern()){
-			return this.cards.get(2).compareTo(other.getCard(2));
+		
+		if (other.isStraightCardPattern() && other.getNumOfCards()==this.getNumOfCards()){
+			return this.getCard(0).compareTo(other.getCard(0));
 		}
+		
 		//In all other cases THIS CardPattern Loses.
 		return -1;
+			
 	}
-	public boolean isFullHouseCardPattern(){
+	
+	public boolean isStraightCardPattern(){
 		return true;
 	}
+	
 }

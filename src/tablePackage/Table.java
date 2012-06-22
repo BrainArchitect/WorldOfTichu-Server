@@ -77,6 +77,13 @@ public abstract class Table implements Comparable<Table>{
 	public Client[] getPlayers() {
 		return players;
 	}
+	
+	public Client getPlayer(int seatNo) {
+		if((seatNo<0) || (seatNo>3)){
+			return null;
+		}
+		return players[seatNo];
+	}
 
 	public TreeSet<Client> getObservers() {
 		return observers;

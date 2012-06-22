@@ -1,4 +1,4 @@
-package cards.patterns;
+package cards;
 import cards.*;
 
 import java.util.ArrayList;
@@ -19,6 +19,14 @@ public abstract class CardPattern implements Comparable<CardPattern>{
 	
 	public ArrayList<Card> getListOfCards(){
 		return cards;
+	}
+	
+	public int getPoints(){
+		int points = 0;
+		for(Card aCard: cards){
+			points += aCard.getPoints();
+		}
+		return points;
 	}
 	
 	/** This method compares the current card pattern with another

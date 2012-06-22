@@ -3,26 +3,37 @@ package tablePackage;
 import java.util.ArrayList;
 
 import cards.Card;
+import cards.CardPattern;
+import cards.CardPatternFactory;
 import cards.patterns.*;
 import clientPackage.Client;
 
 public class Game {
+	
+	private Table table;
+	
 	private Deck deck;
 
 	private int continueCounter;
-	private int exchangeCounter;
-	
+	private int exchangeCounter;	
 	private int passes;
-	private int winningSeatNo;
-	private int trickPoints;
-	
-	private ArrayList<Card>[] cardLists ;
 	
 	private int wish;
+
+	
+	private int winningSeatNo;
 	private boolean dragonPlayed;
 	//Seat of player that has the dragon
 	private int dragonMasterSeat;
+
 	
+	private ArrayList<Card>[] cardsAtHand ;
+	private ArrayList<CardPattern>[] cardsCollected;
+	private ArrayList<CardPattern> cardsAtTrick;
+	
+	
+	private int tichu[];
+		
 	private int pointsLimit;
 	private int minutesLimit;
 	
@@ -33,7 +44,7 @@ public class Game {
 	//0-no tichu
 	//1-small tichu
 	//2-large tichu
-	private int tichu[];
+
 	
 	private boolean endOfHand;
 	private boolean endOfGame;
@@ -45,9 +56,15 @@ public class Game {
 
 	private int nextPlayerSeat;
 	
-	public Game(Table table, Client host, String password){
-		cardLists = (ArrayList<Card>[])new ArrayList[4];
+	public Game(Table table){
+		this.table = table;
 		deck = new Deck();
+		
+		cardsAtHand = (ArrayList<Card>[]) new ArrayList[4];
+		cardsCollected = (ArrayList<CardPattern>[]) new ArrayList[4];
+		cardsAtTrick = new  ArrayList<CardPattern>();
+		
+		
 		
 	}	
 	
@@ -59,7 +76,6 @@ public class Game {
 	private void reset(){
 		this.passes = 0;
 		this.winningSeatNo = -1;
-		this.trickPoints=0;
 		this.continueCounter = 0;
 		this.exchangeCounter = 0;
 		this.wish = 0;
@@ -67,7 +83,6 @@ public class Game {
 		this.activePlayers = 4;
 		this.endOfHand = false;
 		this.endOfGame = false;
-		
 		deck.shuffle();
 		this.dealCards(8);
 	
@@ -85,8 +100,8 @@ public class Game {
 	 */
 	public void dealCards(int ammount){
 		for (int i=0; i<4; i++){
-			ArrayList<Card> cards = deck.next(ammount);
-			cardLists[i].addAll(cards);
+			ArrayList<Card> cards = deck.dealCards(ammount);
+			cardsAtHand[i].addAll(cards);
 		}
 	}	
 	
@@ -101,7 +116,7 @@ public class Game {
 			}catch(NumberFormatException e){
 				return null;
 			}
-			for(Card card: cardLists[seatNo]){
+			for(Card card: cardsAtHand[seatNo]){
 				if(card.getValue()==value && card.getColor()==color){
 					tempList.add(card);
 					break;
@@ -138,11 +153,11 @@ public class Game {
 		passes = 0;
 	}
 	
-	public synchronized void makeAWish(Client client, String value){
+	public synchronized void makeAWish(int seatNo, String value){
 
 	}
 	
-	public synchronized void bomb(Client client){
+	public synchronized void bomb(int seatNo){
 
 	}	
 	
@@ -160,13 +175,12 @@ public class Game {
 		}
 		
 		int nextPlayerSeat = NEXT_SEAT[seatNo];
-		while (cardLists[nextPlayerSeat].isEmpty())
+		while (cardsAtHand[nextPlayerSeat].isEmpty())
 			nextPlayerSeat = NEXT_SEAT[nextPlayerSeat];
 
 	}	
 	
 	public synchronized void dragon(int luckyOpponentSeat){
-		trickPoints = 0;
 		passes = 0;
 	}
 	
@@ -210,10 +224,10 @@ public class Game {
 			int team2points=0;
 			//If the Hand is finished with 1-2
 			if(activePlayers==2){
-				if(cardLists[0].isEmpty() && cardLists[2].isEmpty()){
+				if(cardsAtHand[0].isEmpty() && cardsAtHand[2].isEmpty()){
 					team1points += 200;
 					endOfHand= true;
-				}else if(cardLists[1].isEmpty() && cardLists[3].isEmpty()){
+				}else if(cardsAtHand[1].isEmpty() && cardsAtHand[3].isEmpty()){
 					team2points += 200;
 					endOfHand= true;
 				}

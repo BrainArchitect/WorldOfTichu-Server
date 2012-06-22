@@ -1,14 +1,14 @@
-package cards.patterns;
+package cards;
 import cards.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class StraightCardPattern extends CardPattern{
-	
-	public StraightCardPattern (ArrayList <Card> c){
+public class SuccessivePairsCardPattern extends CardPattern{
 
+	public SuccessivePairsCardPattern (ArrayList <Card> c){
+		
 		//Sorting the ArrayList from smaller to bigger to facilitate
 		//the checks that occur later
 		Collections.sort(c);
@@ -18,23 +18,20 @@ public class StraightCardPattern extends CardPattern{
 	}
 
 	public int compareTo(CardPattern other) {
-
+		
 
 		if(other==null){
 			return 1;
-		}
-		
-		if (other.isStraightCardPattern() && other.getNumOfCards()==this.getNumOfCards()){
+		}		
+
+		if (other.isSuccessivePairsCardPattern() && other.getNumOfCards()==this.getNumOfCards()){
 			return this.getCard(0).compareTo(other.getCard(0));
 		}
 		
-		//In all other cases THIS CardPattern Loses.
+		//In all other cases THIS CardPattern Loses.		
 		return -1;
-			
 	}
-	
-	public boolean isStraightCardPattern(){
+	public boolean isSuccessivePairsCardPattern(){
 		return true;
 	}
-	
 }

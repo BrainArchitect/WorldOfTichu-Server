@@ -24,10 +24,10 @@ public class Deck {
 		}
 		
 		// Insert special cards to deck.
-		cards.add(new Dragon(16,4));
-		cards.add(new Phoenix(15,4));
-		cards.add(new Dogs(-1,4));
-		cards.add(new Phoenix(1,4));
+		cards.add(new Card(16,4));//Dragon
+		cards.add(new Card(15,4));//Phoenix
+		cards.add(new Card(-1,4));//Dogs
+		cards.add(new Card(1,4));//Mahjong
 	}	
 	
 	/**
@@ -39,10 +39,10 @@ public class Deck {
 		offset = 0;
 	}
 	
-	public ArrayList<Card> next(int limit){
+	public ArrayList<Card> dealCards(int limit){
 		ArrayList<Card> subList = new ArrayList<Card>();
 		for (int i=offset; i<offset + limit; i++)
-			subList.add(cards.get(i));
+			subList.add(cards.remove(i));
 		
 		offset += limit;
 		return subList;

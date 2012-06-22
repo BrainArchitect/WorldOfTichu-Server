@@ -1,21 +1,24 @@
-package cards.patterns;
+package cards;
+
 import cards.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class OnePairCardPattern extends CardPattern{
+public class ThreeCardPattern extends CardPattern{
 
-	public OnePairCardPattern (ArrayList <Card> c){
+	public ThreeCardPattern (ArrayList <Card> c){
+		
 		//Sorting the ArrayList from smaller to bigger to facilitate
 		//the checks that occur later
 		Collections.sort(c);
+		
+		//cards is a PROTECTED field inherited from the super class
 		this.cards =c;
 	}
 
-
-	public boolean isOnePairCardPattern(){
+	public boolean isThreeCardPattern(){
 		return true;
 	}
 }

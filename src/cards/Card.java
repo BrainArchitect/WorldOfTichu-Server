@@ -11,6 +11,12 @@ public class Card implements Comparable<Card>{
 	private int value;
 	private int color;
 	
+	private static final int SPECIAL_CARD_COLOR = 4;
+	private static final int DRAGON_VALUE = 16;
+	private static final int DOGS_VALUE = -1;
+	private static final int MAHJONG_VALUE = 1;
+
+	
 	public Card (int value,int color){
 		this.value=value;
 		this.color=color;
@@ -21,6 +27,10 @@ public class Card implements Comparable<Card>{
 			return 5;
 		}else if(value==10 || value==13){
 			return 10;
+		}else if(isDragon()){
+			return 25;
+		}else if(isPhoenix()){
+			return -25;
 		}
 		return 0;
 	}
@@ -36,17 +46,24 @@ public class Card implements Comparable<Card>{
 	public void setColor(int color) {
 		this.color = color;
 	}
-	public boolean isMahjong(){
+	public boolean isSpecialCard(){
+		if(color== SPECIAL_CARD_COLOR){
+			return true;
+		}
 		return false;
+	}
+	
+	public boolean isMahjong(){
+		return (isSpecialCard() && value==MAHJONG_VALUE);
 	}
 	public boolean isDog(){
-		return false;
+		return (isSpecialCard() && value==DOGS_VALUE);
 	}
 	public boolean isDragon(){
-		return false;
+		return (isSpecialCard()&& value==DRAGON_VALUE);
 	}
 	public boolean isPhoenix(){
-		return false;
+		return (isSpecialCard() && !(isDog() || isMahjong() || isDragon()));
 	}
 	@Override
 	public int compareTo(Card other) {
