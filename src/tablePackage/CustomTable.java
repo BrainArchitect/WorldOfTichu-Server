@@ -12,7 +12,7 @@ public class CustomTable extends Table {
 	
 	public CustomTable(String identifier){
 		super(identifier);
-		players = new Client[4];
+		seatedClients = new Client[4];
 	}
 	
 	public boolean isCustomTable(){		
@@ -22,7 +22,7 @@ public class CustomTable extends Table {
 	
 	public boolean addHost(Client c){
 		if(c!=null){
-			players[0]= c;
+			seatedClients[0]= c;
 			c.setTable(this);
 		}
 
@@ -42,8 +42,8 @@ public class CustomTable extends Table {
 				//*************************************************************************************************
 				String msgTableDetails="3c1R~"+super.getID()+"~"+ c.getInfo().getUsername() +"~"+getNumOfPlayers()+"~"+observers.size()+"~"+invitations.size()+"~";
 				for(int sitNo=0;sitNo<4;sitNo++){
-					if(players[sitNo]!=null){
-						msgTableDetails = msgTableDetails + sitNo +"~"+ players[sitNo].getInfo().getUsername()+"~";
+					if(seatedClients[sitNo]!=null){
+						msgTableDetails = msgTableDetails + sitNo +"~"+ seatedClients[sitNo].getInfo().getUsername()+"~";
 					}
 				}
 				for(Client client : observers){
@@ -78,12 +78,12 @@ public class CustomTable extends Table {
 			client.send("3f1R~\n");
 			this.sendMessageBut("3f2R~"+client.getInfo().getUsername()+"~\n", client);
 		}else{
-			if(players[0]==client){
+			if(seatedClients[0]==client){
 				TableManager.removeCustomTable(this);
 				this.sendMessage("3k1R~\n");
 				for(int sitNo=0;sitNo<4;sitNo++){
-					if(players[sitNo]!=null){
-						players[sitNo].setTable(null);
+					if(seatedClients[sitNo]!=null){
+						seatedClients[sitNo].setTable(null);
 					}
 					for(Client c : observers){
 						c.setTable(null);
@@ -93,8 +93,8 @@ public class CustomTable extends Table {
 				
 			}else{
 				for(int sitNo=1;sitNo<4;sitNo++){
-					if(players[sitNo]== client){
-						players[sitNo]=null;
+					if(seatedClients[sitNo]== client){
+						seatedClients[sitNo]=null;
 						success =true;
 						this.smnGotUp(client);
 						client.send("3f1R~\n");
@@ -120,12 +120,12 @@ public class CustomTable extends Table {
 		
 
 							
-		if(players[sitNo]==null && doesNotSitAnyWhere(c)){
+		if(seatedClients[sitNo]==null && doesNotSitAnyWhere(c)){
 			TableManager.unsubscribeClientToCustomGame(c);
 			
 
 			observers.remove(c);
-			players[sitNo]= c;
+			seatedClients[sitNo]= c;
 			
 			String message = "3dR~"+sitNo+"~"+c.getInfo().getUsername()+"~\n";
 			this.sendMessage(message);
@@ -143,9 +143,9 @@ public class CustomTable extends Table {
 	public boolean smnGotUp(Client c){
 		
 		for(int sitNo=0; sitNo<4; sitNo++){
-			if(players[sitNo]==c){
+			if(seatedClients[sitNo]==c){
 				observers.add(c);
-				players[sitNo]= null;
+				seatedClients[sitNo]= null;
 				this.sendMessage("3eR~"+sitNo+"~"+c.getInfo().getUsername()+"~\n");
 				TableManager.tableValuesUpdated("3uR~"+super.getID()+"~"+this.getNumOfPlayers()+"~\n");
 				return true;
@@ -168,17 +168,23 @@ public class CustomTable extends Table {
 	
 	public void startGame(Client c){
 
-		if(players[0]==c && getNumOfPlayers()==4){
+		if(seatedClients[0]==c && getNumOfPlayers()==4){
 			started = true;
+			Player[] players = new Player[4];
+			for(int i=0; i<4;i++){
+				players[i] = new Player(seatedClients[i], this);
+			}
+			game = new Game();
 			sendMessage("3jR~\n");
 			//MORE CODE NEEDED
+			
 		}
 		
 	}
 	
 	public int getNumOfPlayers(){
 		int sum = 0;
-		for(Client c : players){
+		for(Client c : seatedClients){
 			if(c!=null){
 				sum++;
 			}
@@ -188,7 +194,7 @@ public class CustomTable extends Table {
 	
 	
 	private void sendMessage(String message){
-		for (Client c : players){
+		for (Client c : seatedClients){
 			if (c!=null){
 				c.send(message);
 			}
@@ -201,7 +207,7 @@ public class CustomTable extends Table {
 	
 	
 	private void sendMessageBut(String message, Client client){
-		for (Client c : players){
+		for (Client c : seatedClients){
 			if (c!=null && c!=client){
 				c.send(message);
 			}
@@ -217,7 +223,7 @@ public class CustomTable extends Table {
 	
 	
 	private boolean doesNotExist(Client client){
-		for(Client c : players){
+		for(Client c : seatedClients){
 			if(client == c){
 				return false;
 			}
@@ -227,7 +233,7 @@ public class CustomTable extends Table {
 	}
 	
 	private boolean doesNotSitAnyWhere(Client client){
-		for(Client c : players){
+		for(Client c : seatedClients){
 			if(client == c){
 				return false;
 			}

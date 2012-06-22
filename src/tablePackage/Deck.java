@@ -47,4 +47,8 @@ public class Deck {
 		offset += limit;
 		return subList;
 	}
+	
+	public void addCardsToDeck(ArrayList<Card> cards){
+		this.cards.addAll(cards);
+	}
 }

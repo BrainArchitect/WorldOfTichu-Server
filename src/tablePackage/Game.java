@@ -10,29 +10,27 @@ import clientPackage.Client;
 
 public class Game {
 	
-	private Table table;
+	//private Table table;
 	
 	private Deck deck;
+	private Trick trick;
 
 	private int continueCounter;
 	private int exchangeCounter;	
 	private int passes;
 	
-	private int wish;
+	private boolean wishActivated;
+	private int wishNumber;
 
 	
 	private int winningSeatNo;
 	private boolean dragonPlayed;
 	//Seat of player that has the dragon
 	private int dragonMasterSeat;
+	
+	
+	private Player[] players;
 
-	
-	private ArrayList<Card>[] cardsAtHand ;
-	private ArrayList<CardPattern>[] cardsCollected;
-	private ArrayList<CardPattern> cardsAtTrick;
-	
-	
-	private int tichu[];
 		
 	private int pointsLimit;
 	private int minutesLimit;
@@ -40,10 +38,7 @@ public class Game {
 	//Num of players that their cardList is not empty
 	private int activePlayers;
 	
-	//Represents the tichu said value of all players
-	//0-no tichu
-	//1-small tichu
-	//2-large tichu
+
 
 	
 	private boolean endOfHand;
@@ -56,14 +51,12 @@ public class Game {
 
 	private int nextPlayerSeat;
 	
-	public Game(Table table){
-		this.table = table;
+	public Game(Player[] players){
+		this.players = players;
 		deck = new Deck();
-		
-		cardsAtHand = (ArrayList<Card>[]) new ArrayList[4];
-		cardsCollected = (ArrayList<CardPattern>[]) new ArrayList[4];
-		cardsAtTrick = new  ArrayList<CardPattern>();
-		
+		trick = new Trick();
+
+			
 		
 		
 	}	
@@ -78,11 +71,36 @@ public class Game {
 		this.winningSeatNo = -1;
 		this.continueCounter = 0;
 		this.exchangeCounter = 0;
-		this.wish = 0;
+		this.wishActivated = false;
+		this.wishNumber = -1;
 		this.dragonPlayed = false;
 		this.activePlayers = 4;
 		this.endOfHand = false;
 		this.endOfGame = false;
+		
+		
+		//Return players Cards to Deck & Reset Players
+		for(Player player: players){
+			if(player.getCardsAtHand()!=null){
+				deck.addCardsToDeck(player.getCardsAtHand());
+				for(CardPattern cardPattern: player.getCardsCollected()){
+					if(cardPattern!=null){
+						deck.addCardsToDeck(cardPattern.getListOfCards());
+					}
+				}
+			}
+			player.reset();
+		}
+		
+		//Return trick cards to Deck & reset Trick.
+		if(trick.getCardsAtTrick()!=null){
+			for(CardPattern cardPattern: trick.getCardsAtTrick()){
+				if(cardPattern!=null){
+					deck.addCardsToDeck(cardPattern.getListOfCards());
+				}
+			}
+			trick.reset();
+		}
 		deck.shuffle();
 		this.dealCards(8);
 	
@@ -101,13 +119,15 @@ public class Game {
 	public void dealCards(int ammount){
 		for (int i=0; i<4; i++){
 			ArrayList<Card> cards = deck.dealCards(ammount);
-			cardsAtHand[i].addAll(cards);
+			players[i].addCardsAtHand(cards);
 		}
 	}	
 	
 	public ArrayList<Card> toCards(int seatNo, ArrayList<String> cards){
 		ArrayList<Card> tempList = new ArrayList<Card>();
-		for(String tempCard : cards){
+		
+		while (!cards.isEmpty()){
+			String tempCard=cards.get(0);
 			int  value;
 			int color;
 			try{
@@ -116,17 +136,45 @@ public class Game {
 			}catch(NumberFormatException e){
 				return null;
 			}
-			for(Card card: cardsAtHand[seatNo]){
+			for(Card card: players[seatNo].getCardsAtHand()){
 				if(card.getValue()==value && card.getColor()==color){
+					cards.remove(tempCard);
 					tempList.add(card);
 					break;
 				}
 			}
-			
-		}
-		
-		if(tempList.size()==cards.size()){
+		}			
+	
+		//If all cards successfuly parsed
+		if(cards.isEmpty()){
 			return tempList;
+		//Else check Phoenix use
+		}else if(cards.size()==1){
+			boolean hasPhoenix = false;
+			Card phoenixCard = null;
+			for(Card card: players[seatNo].getCardsAtHand()){
+				if(card.isPhoenix()){
+					phoenixCard = card;
+					hasPhoenix = true;
+					break;
+				}
+			}
+			if(hasPhoenix){
+				String tempCard=cards.get(0);
+				int  value;
+				int color;
+				try{
+					 value = Integer.parseInt(tempCard.substring(0, 2));
+					 color = Integer.parseInt(tempCard.substring(2, 3));
+					 if(color==Card.SPECIAL_CARD_COLOR ){
+						 if(value>Card.MAHJONG_VALUE && value<Card.DRAGON_VALUE){
+							 tempList.add(phoenixCard);
+						 }
+					 }
+				}catch(NumberFormatException e){
+					return null;
+				}
+			}
 		}
 		return null;
 	}
@@ -136,23 +184,64 @@ public class Game {
 
 	public synchronized void tossCardPatern(int seatNo, ArrayList<String> anyCards){
 		dragonPlayed = false;
+		boolean acceptableToss = false;
+		
+		
 		CardPatternFactory factory = new CardPatternFactory();
 		CardPattern cardPattern = factory.createCardPattern(toCards(seatNo, anyCards));
 
-		if (cardPattern.isOneCardPattern() && cardPattern.getCard(0).isDragon()){
-			dragonPlayed = true;
-			dragonMasterSeat = seatNo;
+		if(cardPattern==null){
+			try{
+				throw new Exception();
+			}catch(Exception e){
+				System.err.println("This is a client hacker exception");
+				return;
+			}
 		}
+		
+		if(wishActivated){
+			if(!isWishCompliant(cardPattern)){
+				//if(checkCombinationsForWIsh()){
+					
+				//}
+			}
+		}
+		
+		CardPattern lastTrickCardPattern = trick.getLastPlayedCardPattern();
+		if(!(cardPattern.compareTo(lastTrickCardPattern)>0)){
+			System.err.println("This is a client hacker or logical exception");
+			return;
+		}
+		
 
 		winningSeatNo = seatNo;
-				
-		int currentPlayerSeat = seatNo;	
-		nextPlayerSeat = NEXT_SEAT[currentPlayerSeat];
-		
-					
+		nextPlayerSeat = NEXT_SEAT[seatNo];
 		passes = 0;
+		
+		if (cardPattern.isOneCardPattern()){
+				if(cardPattern.getCard(0).isDragon()){
+					dragonPlayed = true;
+					dragonMasterSeat = seatNo;
+				}else if(cardPattern.getCard(0).isDog()){
+					nextPlayerSeat = NEXT_SEAT[NEXT_SEAT[seatNo]];
+				}else if(cardPattern.getCard(0).isMahjong() && wishActivated){
+					
+				}else if(cardPattern.getCard(0).isPhoenix()){
+					lastTrickCardPattern = trick.getCardsAtTrick().get(trick.getCardsAtTrick().size()-2);
+					if(lastTrickCardPattern.isOneCardPattern()){
+						cardPattern.getCard(0).setValue(lastTrickCardPattern.getCard(0).getValue());
+						
+					}
+				}
+		}
+
 	}
 	
+	private boolean isWishCompliant(CardPattern cardPattern) {
+		return false;
+		
+	}
+
 	public synchronized void makeAWish(int seatNo, String value){
 
 	}
@@ -175,7 +264,7 @@ public class Game {
 		}
 		
 		int nextPlayerSeat = NEXT_SEAT[seatNo];
-		while (cardsAtHand[nextPlayerSeat].isEmpty())
+		while (players[nextPlayerSeat].getCardsAtHand().isEmpty())
 			nextPlayerSeat = NEXT_SEAT[nextPlayerSeat];
 
 	}	
@@ -224,13 +313,14 @@ public class Game {
 			int team2points=0;
 			//If the Hand is finished with 1-2
 			if(activePlayers==2){
-				if(cardsAtHand[0].isEmpty() && cardsAtHand[2].isEmpty()){
+				if(players[0].getCardsAtHand().isEmpty() && players[2].getCardsAtHand().isEmpty()){
 					team1points += 200;
 					endOfHand= true;
-				}else if(cardsAtHand[1].isEmpty() && cardsAtHand[3].isEmpty()){
+				}else if(players[1].getCardsAtHand().isEmpty() && players[3].getCardsAtHand().isEmpty()){
 					team2points += 200;
 					endOfHand= true;
 				}
+			
 				/*
 				if(endOfHand){
 					int sign[]= new int[4];
@@ -340,5 +430,5 @@ public class Game {
 		
 			}
 	}
-	
 }
+	

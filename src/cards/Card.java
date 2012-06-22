@@ -11,10 +11,10 @@ public class Card implements Comparable<Card>{
 	private int value;
 	private int color;
 	
-	private static final int SPECIAL_CARD_COLOR = 4;
-	private static final int DRAGON_VALUE = 16;
-	private static final int DOGS_VALUE = -1;
-	private static final int MAHJONG_VALUE = 1;
+	public static final int SPECIAL_CARD_COLOR = 4;
+	public static final int DRAGON_VALUE = 16;
+	public static final int DOGS_VALUE = -1;
+	public static final int MAHJONG_VALUE = 1;
 
 	
 	public Card (int value,int color){
@@ -34,6 +34,7 @@ public class Card implements Comparable<Card>{
 		}
 		return 0;
 	}
+	
 	public int getValue() {
 		return value;
 	}
@@ -67,7 +68,7 @@ public class Card implements Comparable<Card>{
 	}
 	@Override
 	public int compareTo(Card other) {
-		return (this.value - other.value);
+		return this.value - other.value;
 	}
 	
 	public boolean equals(Card other){

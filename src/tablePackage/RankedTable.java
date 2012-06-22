@@ -7,7 +7,7 @@ public class RankedTable extends Table{
 	
 	public RankedTable(String identifier){
 		super(identifier);
-		players = new Client[4];
+		seatedClients = new Client[4];
 	}
 	
 	public boolean isRankedTable(){

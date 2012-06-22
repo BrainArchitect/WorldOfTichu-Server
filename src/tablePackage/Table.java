@@ -10,10 +10,11 @@ import clientPackage.Client;
 
 public abstract class Table implements Comparable<Table>{
 	
-	protected Client[] players;
+	protected Client[] seatedClients;
 	protected TreeSet<Client> observers = new TreeSet<Client>();
 	protected TreeSet<Invitation> invitations = new TreeSet<Invitation>();
 	protected boolean started; 
+	protected Game game;
 
 	private String id;
 	
@@ -75,14 +76,14 @@ public abstract class Table implements Comparable<Table>{
 	public abstract void remove(Client c);
 
 	public Client[] getPlayers() {
-		return players;
+		return seatedClients;
 	}
 	
 	public Client getPlayer(int seatNo) {
 		if((seatNo<0) || (seatNo>3)){
 			return null;
 		}
-		return players[seatNo];
+		return seatedClients[seatNo];
 	}
 
 	public TreeSet<Client> getObservers() {
@@ -91,7 +92,7 @@ public abstract class Table implements Comparable<Table>{
 	
 	 public List<Client> getAllClients(){
 		 List<Client> list = new ArrayList<Client>();
-		 for(Client c: players){
+		 for(Client c: seatedClients){
 			 if(c!=null){
 				 list.add(c);
 			 }
