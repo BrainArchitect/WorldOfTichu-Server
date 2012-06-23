@@ -1,5 +1,4 @@
 package cards;
-import cards.*;
 
 import java.util.ArrayList;
 
@@ -78,7 +77,5 @@ public abstract class CardPattern implements Comparable<CardPattern>{
 	public boolean isFullHouseCardPattern(){
 		return false;
 	}
-	
-	
 	
 }

@@ -1,11 +1,11 @@
 package tablePackage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import cards.Card;
 import cards.CardPattern;
 import cards.CardPatternFactory;
-import cards.patterns.*;
 import clientPackage.Client;
 
 public class Game {
@@ -55,18 +55,18 @@ public class Game {
 		this.players = players;
 		deck = new Deck();
 		trick = new Trick();
-
-			
-		
-		
 	}	
 	
 	public void start(){
-		reset();
+		resetHand();
 	}
 
+	private void resetGame(){
+		sumTeam1Points = 0;
+		sumTeam2Points = 0;
+	}
 
-	private void reset(){
+	private void resetHand(){
 		this.passes = 0;
 		this.winningSeatNo = -1;
 		this.continueCounter = 0;
@@ -241,6 +241,10 @@ public class Game {
 		return false;
 		
 	}
+	
+	
+	
+
 
 	public synchronized void makeAWish(int seatNo, String value){
 
@@ -276,14 +280,13 @@ public class Game {
 	public synchronized void incrementContinues(){
 			this.continueCounter ++;
 		if (continueCounter == 4){
-			dealCards(6);
+			this.dealCards(6);
 			continueCounter = 0;
 		}
 	}
 	
 	public synchronized void incrementExchanges(){
 		this.exchangeCounter ++;
-		
 		if (exchangeCounter == 4){
 
 		}
@@ -429,6 +432,101 @@ public class Game {
 				}*/
 		
 			}
+	}
+	
+	
+	private boolean canCompleteWish(ArrayList<Card> cards, int wishNumber, CardPattern lastPlayedCardPattern){
+		Collections.sort(cards);
+		
+	
+		ArrayList<Integer> wishCardIndexes = new ArrayList<Integer>();
+		boolean isPhoenixPresent = false;
+		int phoenixIndex = -1;
+		
+		int i=0;
+		while(i<cards.size()){
+			if(cards.get(i).getValue()==wishNumber){
+				wishCardIndexes.add(i);
+			}else if(cards.get(i).isPhoenix()){
+				isPhoenixPresent = true;
+				phoenixIndex = i;
+			}
+			
+			i++;
+		}
+
+			
+
+		
+		if(wishCardIndexes.isEmpty()){
+			//There is no card with the wished value
+			return false;
+		}
+		
+		//There is at least one card with the wished value
+		//But we are not sure if we can toss a card Pattern with that
+		//card that wins the last played cardpattern
+		
+		
+		CardPatternFactory factory = new CardPatternFactory();
+		
+		ArrayList<CardPattern> possibleCardPatterns = new ArrayList<CardPattern>();
+		boolean found = false;
+		
+		if(lastPlayedCardPattern==null){
+			return true;
+		}else if(lastPlayedCardPattern.isOneCardPattern()){
+			//[X]
+			ArrayList<Card> subsetCards = new ArrayList<Card>();
+			subsetCards.add(cards.get(wishCardIndexes.get(0)));
+			possibleCardPatterns.add(factory.createCardPattern(subsetCards));
+		
+		}else if(lastPlayedCardPattern.isOnePairCardPattern()){
+			if(wishCardIndexes.size()>1){
+				//[X][X]
+				ArrayList<Card> subsetCards = new ArrayList<Card>();
+				subsetCards.add(cards.get(wishCardIndexes.get(0)));
+				subsetCards.add(cards.get(wishCardIndexes.get(0)));
+				possibleCardPatterns.add(factory.createCardPattern(subsetCards));
+			}else if(isPhoenixPresent){
+				//[X][X=PH]
+				ArrayList<Card> subsetCards = new ArrayList<Card>();
+				subsetCards.add(cards.get(wishCardIndexes.get(0)));
+				subsetCards.add(cards.get(phoenixIndex));
+				possibleCardPatterns.add(factory.createCardPattern(subsetCards));
+			}
+		//[X][X][X]
+		}else if(lastPlayedCardPattern.isThreeCardPattern()){
+			if(wishCardIndexes.size()>2){
+				ArrayList<Card> subsetCards = new ArrayList<Card>();
+				subsetCards.add(cards.get(wishCardIndexes.get(0)));
+				subsetCards.add(cards.get(wishCardIndexes.get(1)));
+				subsetCards.add(cards.get(phoenixIndex));
+				possibleCardPatterns.add(factory.createCardPattern(subsetCards));
+			}			
+			//[X][X][X=PH]
+			if(wishCardIndexes.size()>1 && isPhoenixPresent){
+				ArrayList<Card> subsetCards = new ArrayList<Card>();
+				subsetCards.add(cards.get(wishCardIndexes.get(0)));
+				subsetCards.add(cards.get(wishCardIndexes.get(1)));
+				subsetCards.add(cards.get(wishCardIndexes.get(2)));
+				possibleCardPatterns.add(factory.createCardPattern(subsetCards));
+			}
+			
+		}else if(lastPlayedCardPattern.isSuccessivePairsCardPattern()){
+
+			
+		}
+		
+		for(CardPattern cardPaattern : possibleCardPatterns){
+			if(cardPaattern!=null && cardPaattern.compareTo(lastPlayedCardPattern)>0){
+				found =  true;
+				return true;
+			}
+		}
+		
+		return false;
+		
 	}
 }
 	
