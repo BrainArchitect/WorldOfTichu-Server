@@ -12,9 +12,9 @@ public class SendTableChatMessage extends Command {
 	@Override
 	public void execute(Client client, String... params) {
 		String text = params[1];
-		Table table = client.getTable();
-		if(table!=null && table.isCustomTable()){
-			((CustomTable) table).sendText(client, text);
+		CustomTable table = client.getTable();
+		if(table!=null){
+			table.sendText(client, text);
 		}
 
 	}

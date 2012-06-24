@@ -4,7 +4,7 @@ import game.Player;
 import java.net.Socket;
 import java.util.TreeSet;
 
-import tablePackage.Table;
+import tablePackage.CustomTable;
 
 import mainPackage.Database;
 
@@ -26,7 +26,7 @@ public class Client implements Comparable<Client>{
 	
 	private Info info;
 
-	private Table table;
+	private CustomTable table;
 	private Player player;
 	
 	
@@ -48,7 +48,7 @@ public class Client implements Comparable<Client>{
 	public Info getInfo (){ return this.info; }
 	public synchronized String getMessageOut() { return this.messageOut; }
 	public Socket getSocket(){ return this.socket; }
-	public Table getTable(){return table;}
+	public CustomTable getTable(){return table;}
 	public Player getPlayer(){return player;}
 	
 	// Setters
@@ -56,7 +56,7 @@ public class Client implements Comparable<Client>{
 
 	public synchronized void setMessageOut(String messageOut) { this.messageOut = messageOut; }
 	public boolean isClosed(){ return this.closed; }
-	public void setTable(Table aTable){table = aTable;}
+	public void setTable(CustomTable aTable){table = aTable;}
 	public Player setPlayer(){return player;}
 	
 	/**

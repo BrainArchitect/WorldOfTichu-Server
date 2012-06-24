@@ -12,10 +12,10 @@ public class SitDown extends Command {
 	@Override
 	public void execute(Client client, String... params) {
 		int sitNo = Integer.parseInt(params[1]);
-		Table t = client.getTable();
+		CustomTable t = client.getTable();
 
-		if(t!=null && t.isCustomTable()){
-			((CustomTable) t).smnSitDown(client, sitNo);
+		if(t!=null){
+			 t.smnSitDown(client, sitNo);
 		}
 	}
 

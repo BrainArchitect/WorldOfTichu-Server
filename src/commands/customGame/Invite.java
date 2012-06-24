@@ -17,7 +17,7 @@ public class Invite extends Command {
 		String userName = params[1];
 		String hostName = client.getInfo().getUsername();
 		Client invitedClient = Client.getClient(userName);
-		Table table = client.getTable();
+		CustomTable table = client.getTable();
 		
 		if(invitedClient!=null && table!=null){
 			if(table.inviteToTable(invitedClient)){

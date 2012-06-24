@@ -13,9 +13,9 @@ public class StartGame extends Command {
 	public void execute(Client client, String... params) {
 
 		
-		Table table = client.getTable();
-		if(table!=null && table.isCustomTable() && !table.isStarted()){
-			((CustomTable) table).startGame(client);
+		CustomTable table = client.getTable();
+		if(table!=null && !table.isStarted()){
+			table.startGame(client);
 		}
 	}
 

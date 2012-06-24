@@ -10,8 +10,8 @@ public class TableManager {
 	private static TreeSet<CustomTable> customTables = new TreeSet<CustomTable>();
 	private static TreeSet<Client> customGameSubscribers = new TreeSet<Client>();
 	
-	private static TreeSet<RankedTable> rankedTables = new TreeSet<RankedTable>();
-	private static TreeSet<Client> rankedGameSubscribers = new TreeSet<Client>(); 
+	//private static TreeSet<RankedTable> rankedTables = new TreeSet<RankedTable>();
+	//private static TreeSet<Client> rankedGameSubscribers = new TreeSet<Client>(); 
 	
 	
 	public static synchronized boolean subscribeClientToCustomGame(Client client){
@@ -33,6 +33,10 @@ public class TableManager {
 	}
 	
 	public static synchronized void unsubscribeClientToCustomGame(Client client){
+		CustomTable t = client.getTable();
+		if(t!=null){
+			
+		}
 		customGameSubscribers.remove(client);
 	}
 	
@@ -92,6 +96,6 @@ public class TableManager {
 	}
 
 	public static int getCustomTablesSize(){ return customTables.size(); }
-	public static int getRankedTablesSize(){ return rankedTables.size(); }
+	//public static int getRankedTablesSize(){ return rankedTables.size(); }
 	
 }

@@ -15,8 +15,6 @@ public class Game {
 	private Deck deck;
 	private Trick trick;
 
-	private int continueCounter;
-	private int exchangeCounter;	
 	private int passes;
 	
 	private boolean wishActivated;
@@ -69,8 +67,6 @@ public class Game {
 	private void resetHand(){
 		this.passes = 0;
 		this.winningSeatNo = -1;
-		this.continueCounter = 0;
-		this.exchangeCounter = 0;
 		this.wishActivated = false;
 		this.wishNumber = -1;
 		this.dragonPlayed = false;
@@ -109,6 +105,8 @@ public class Game {
 
 	public int getPointLimit(){ return pointsLimit; }
 	public int getMinutesLimit(){ return minutesLimit; }
+	public void setPointLimit(int pointsLimit){ this.pointsLimit= pointsLimit; }
+	public void setMinutesLimit(int minutesLimit){this.minutesLimit = minutesLimit;}
 
 	
 	/**
@@ -277,22 +275,20 @@ public class Game {
 		passes = 0;
 	}
 	
-	public synchronized void incrementContinues(){
-			this.continueCounter ++;
-		if (continueCounter == 4){
+	public synchronized void continueDealing(){
+		int continueCounter=0;
+		for(int i=0;i<4;i++){
+			if (players[i].getContinueDealing()){
+				continueCounter++;
+			}
+		}
+		if(continueCounter==4){
 			this.dealCards(6);
-			continueCounter = 0;
 		}
 	}
 	
 	public synchronized void incrementExchanges(){
-		this.exchangeCounter ++;
-		if (exchangeCounter == 4){
 
-		}
-
-
-		exchangeCounter = 0;
 		
 	}
 	

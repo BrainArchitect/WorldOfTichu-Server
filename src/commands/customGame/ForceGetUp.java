@@ -19,7 +19,7 @@ public class ForceGetUp extends Command {
 	public void execute(Client client, String... params) {
 		Client forcedClient = Client.getClient(params[1]);
 		if (forcedClient != null){
-			CustomTable table = (CustomTable) client.getTable();
+			CustomTable table = client.getTable();
 			if (table != null){
 				table.smnGotUp(forcedClient);
 			}

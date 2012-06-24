@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import mainPackage.Database;
 
-import tablePackage.Table;
+import tablePackage.CustomTable;
 
 import cards.Card;
 import cards.CardPattern;
@@ -13,11 +13,13 @@ import clientPackage.Client;
 public class Player {
 
 	private Client client;
-	private Table table;
+	private Game game;
 	private ArrayList<Card> cardsAtHand;
 	private ArrayList<CardPattern> cardsCollected;
 	private int bankTime;
 	private Statistics statistics;
+	
+	private boolean continueDealing;
 	
 	//Represents the tichu said value of all players
 	//0-no tichu
@@ -27,101 +29,44 @@ public class Player {
 
 	public Player(Client c){
 		client = c;
-		tichu=0;
-		cardsAtHand = new ArrayList<Card>();
-		cardsCollected = new ArrayList<CardPattern>();
-	}
-
-
-
-	public Client getClient() {
-		return client;
-	}
-
-
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
-
-
-
-	public Table getTable() {
-		return table;
-	}
-
-
-
-	public void setTable(Table table) {
-		this.table = table;
-	}
-
-
-
-	public ArrayList<Card> getCardsAtHand() {
-		return cardsAtHand;
-	}
-
-
-
-	public void addCardsAtHand(ArrayList<Card> cardsAtHand) {
-		this.cardsAtHand.addAll(cardsAtHand);
-	}
+		reset();
+	}	
 	
 	public void  reset(){
-		cardsAtHand.removeAll(cardsAtHand);
+		cardsAtHand = new ArrayList<Card>();
+		cardsCollected = new ArrayList<CardPattern>();
 		tichu=0;
-	}
-
-
-
-	public ArrayList<CardPattern> getCardsCollected() {
-		return cardsCollected;
-	}
-
-
-
-	public void setCardsCollected(ArrayList<CardPattern> cardsCollected) {
-		this.cardsCollected = cardsCollected;
+		continueDealing = false;
 	}
 	
-	public int getTichu(){
-		return tichu;
-	}
-	
-	public void setTichu(int tichuType){
-		this.tichu = tichuType;
-	}
+	public void addCardsAtHand(ArrayList<Card> cardsAtHand) {this.cardsAtHand.addAll(cardsAtHand);}
+	public void addCardsCollected(ArrayList<CardPattern> cardsCollected) {this.cardsCollected.addAll(cardsCollected);}
 
-
-
-	public int getBankTime() {
-		return bankTime;
-	}
-
-
-
-	public void setBankTime(int bankTime) {
-		this.bankTime = bankTime;
-	}
-
-
-
-	public Statistics getStatistics() {
-		return statistics;
-	}
-
-
-
-	public void setStatistics(Statistics statistics) {
-		this.statistics = statistics;
-	}
 	
 	public synchronized void registerStatisctics(Statistics statistics){
 		Database.registerStatisctics(statistics);
 	}
 	
 	
-	
+	//Getters
+	//========================================================================================================
+	public Client getClient() {return client;}
+
+	public ArrayList<Card> getCardsAtHand(){return cardsAtHand;}
+	public ArrayList<CardPattern> getCardsCollected() {return cardsCollected;}
+	public int getTichu(){return tichu;}
+	public int getBankTime() {return bankTime;}
+	public boolean getContinueDealing() {return continueDealing;}
+	public Game getGame() {	return game;}
+	public Statistics getStatistics() {	return statistics;}
+
+	//Setters
+	//========================================================================================================
+	public void setClient(Client client) {this.client = client;}
+	public void setTichu(int tichuType){this.tichu = tichuType;}
+	public void setBankTime(int bankTime) {this.bankTime = bankTime;}
+	public void setContinueDealing(boolean continueDealing) {this.continueDealing = continueDealing;}
+	public void setGame(Game game) {this.game = game;}
+	public void setStatistics(Statistics statistics) {this.statistics = statistics;}
 	
 }
