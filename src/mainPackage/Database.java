@@ -1,5 +1,7 @@
 package mainPackage;
 
+import game.Statistics;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,7 +10,6 @@ import java.util.Scanner;
 import java.util.TreeSet;
 
 import clientPackage.Info;
-import clientPackage.Statistics;
 
 
 public class Database {

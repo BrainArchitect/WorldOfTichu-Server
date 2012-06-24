@@ -1,4 +1,4 @@
-package tablePackage;
+package game;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -527,6 +527,41 @@ public class Game {
 		
 		return false;
 		
+	}
+	
+	private ArrayList<CardPattern> hasBomb(ArrayList<Card> cards){
+		ArrayList<CardPattern> bombCardPatterns = new ArrayList<CardPattern>();
+		CardPatternFactory factory = new CardPatternFactory();
+		
+		Collections.sort(cards);
+		int i=0;
+		int sameCardsCounter=0;
+		int size = cards.size();
+		int value=0;
+		while(i<size){
+			if(value==cards.get(i).getValue()){
+				sameCardsCounter++;
+				if(sameCardsCounter==4){
+					ArrayList<Card> bombCards = new ArrayList<Card>();
+					bombCards.add(cards.get(i-3));
+					bombCards.add(cards.get(i-2));
+					bombCards.add(cards.get(i-1));
+					bombCards.add(cards.get(i));
+					
+					bombCardPatterns.add(factory.createCardPattern(bombCards));
+					
+					sameCardsCounter=0;
+				}
+			}else{
+				value=cards.get(i).getValue();
+				sameCardsCounter=0;
+			}
+			i++;
+		}
+		
+		//Collections.sort(arg0, arg1)
+		
+		return null;
 	}
 }
 	

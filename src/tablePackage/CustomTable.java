@@ -1,5 +1,7 @@
 package tablePackage;
 
+import game.Game;
+import game.Player;
 import clientPackage.Client;
 
 public class CustomTable extends Table {
@@ -172,9 +174,10 @@ public class CustomTable extends Table {
 			started = true;
 			Player[] players = new Player[4];
 			for(int i=0; i<4;i++){
-				players[i] = new Player(seatedClients[i], this);
+				players[i] = seatedClients[i].getPlayer();
 			}
-			game = new Game();
+			game = new Game(players);
+			game.start();
 			sendMessage("3jR~\n");
 			//MORE CODE NEEDED
 			

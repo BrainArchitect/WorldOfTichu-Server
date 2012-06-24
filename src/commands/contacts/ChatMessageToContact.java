@@ -13,12 +13,11 @@ public class ChatMessageToContact extends Command{
 	 */
 	@Override
 	public void execute(Client sourceClient, String... params) {
-	
-		String sourceUsername = sourceClient.getInfo().getUsername();
-		String targetUsername = params[1];
+		String sourceUsername = params[1];
+		String targetUsername = params[2];
+		String message = params[3];
 		Client targetClient = Client.getClient(targetUsername);
 		if(targetClient != null){
-			String message = params[2];
 			String response = "2fR~" + sourceUsername +"~"+ targetUsername +"~"+message+ "~\n";
 			targetClient.send(response);
 			sourceClient.send(response);

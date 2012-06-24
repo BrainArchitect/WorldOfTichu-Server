@@ -56,7 +56,7 @@ public class AddInvitationReply extends Command{
 					Client sourceClient = Client.getClient(sourceUsername);
 					if(sourceClient!=null){
 						targetClient.addOnlineContact(sourceClient);
-						targetClient.send("2a2R~" + sourceUsername + "~\n");
+						targetClient.send("2a2R~" + sourceUsername + "~true~\n");
 						
 						
 						sourceClient.addOnlineContact(targetClient);

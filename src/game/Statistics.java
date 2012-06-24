@@ -1,4 +1,4 @@
-package clientPackage;
+package game;
 
 public class Statistics {
 

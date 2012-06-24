@@ -53,7 +53,7 @@ public class Login extends Command{
 		if (info != null && info.getPassword().equals(password)){
 			
 			client.setInfo(info);
-			client.setStatistics(Database.loadStatistics(info.getUsername()));
+			client.getPlayer().setStatistics(Database.loadStatistics(info.getUsername()));
 			
 			if(Client.addClient(client)){
 				

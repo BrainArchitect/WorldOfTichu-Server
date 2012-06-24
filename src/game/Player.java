@@ -1,6 +1,10 @@
-package tablePackage;
+package game;
 
 import java.util.ArrayList;
+
+import mainPackage.Database;
+
+import tablePackage.Table;
 
 import cards.Card;
 import cards.CardPattern;
@@ -13,18 +17,19 @@ public class Player {
 	private ArrayList<Card> cardsAtHand;
 	private ArrayList<CardPattern> cardsCollected;
 	private int bankTime;
+	private Statistics statistics;
 	
 	//Represents the tichu said value of all players
 	//0-no tichu
 	//1-small tichu
 	//2-large tichu
 	private int tichu;
-	
-	
-	
-	public Player(Client c, Table t){
+
+	public Player(Client c){
 		client = c;
-		table = t;
+		tichu=0;
+		cardsAtHand = new ArrayList<Card>();
+		cardsCollected = new ArrayList<CardPattern>();
 	}
 
 
@@ -64,7 +69,7 @@ public class Player {
 	}
 	
 	public void  reset(){
-		cardsAtHand = null;
+		cardsAtHand.removeAll(cardsAtHand);
 		tichu=0;
 	}
 
@@ -79,6 +84,14 @@ public class Player {
 	public void setCardsCollected(ArrayList<CardPattern> cardsCollected) {
 		this.cardsCollected = cardsCollected;
 	}
+	
+	public int getTichu(){
+		return tichu;
+	}
+	
+	public void setTichu(int tichuType){
+		this.tichu = tichuType;
+	}
 
 
 
@@ -91,6 +104,24 @@ public class Player {
 	public void setBankTime(int bankTime) {
 		this.bankTime = bankTime;
 	}
+
+
+
+	public Statistics getStatistics() {
+		return statistics;
+	}
+
+
+
+	public void setStatistics(Statistics statistics) {
+		this.statistics = statistics;
+	}
+	
+	public synchronized void registerStatisctics(Statistics statistics){
+		Database.registerStatisctics(statistics);
+	}
+	
+	
 	
 	
 }

@@ -1,4 +1,6 @@
 package clientPackage;
+import game.Player;
+
 import java.net.Socket;
 import java.util.TreeSet;
 
@@ -23,8 +25,9 @@ public class Client implements Comparable<Client>{
 	private WriterThread writerThread;
 	
 	private Info info;
-	private Statistics statistics;
+
 	private Table table;
+	private Player player;
 	
 	
 	public Client(Socket socket){
@@ -35,22 +38,26 @@ public class Client implements Comparable<Client>{
 		
 		readerThread.start();
 		writerThread.start();
+		
+		player = new Player(this);
+		
 	}
 	
 	
 	// Getters
 	public Info getInfo (){ return this.info; }
-	public Statistics getStatistics() { return this.statistics; }
 	public synchronized String getMessageOut() { return this.messageOut; }
 	public Socket getSocket(){ return this.socket; }
 	public Table getTable(){return table;}
+	public Player getPlayer(){return player;}
 	
 	// Setters
 	public void setInfo(Info info) { this.info = info; }
-	public void setStatistics(Statistics statistics) { this.statistics = statistics; }
+
 	public synchronized void setMessageOut(String messageOut) { this.messageOut = messageOut; }
 	public boolean isClosed(){ return this.closed; }
 	public void setTable(Table aTable){table = aTable;}
+	public Player setPlayer(){return player;}
 	
 	/**
 	 * Method to close connection to client.
@@ -128,9 +135,7 @@ public class Client implements Comparable<Client>{
 	
 	public int getOnlineContactsSize() { return onlineContacts.size(); }
 	
-	public synchronized void registerStatisctics(Statistics statistics){
-		Database.registerStatisctics(statistics);
-	}
+
 	
 	public synchronized TreeSet<String> loadOnlineContacts(){
 		try{
