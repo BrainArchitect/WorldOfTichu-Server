@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import cards.Card;
+import cards.CardComparatorPerColorPerVal;
 import cards.CardPattern;
 import cards.CardPatternFactory;
 import client.Client;
@@ -555,9 +556,34 @@ public class Game {
 			i++;
 		}
 		
-		//Collections.sort(arg0, arg1)
+		Collections.sort(cards, new CardComparatorPerColorPerVal());
 		
-		return null;
+		
+		i=0;		
+		size = cards.size();
+		int cardsCount=0;
+		int color=0;
+		value=0;
+		while(i<size){
+			if((cards.get(i).getColor()==color) && (cards.get(i).getValue()==value+1)){
+				value=cards.get(i).getValue();
+				cardsCount++;
+				if(cardsCount>=4){
+					ArrayList<Card> bombCards = new ArrayList<Card>();
+					for(int j=0;j<=cardsCount;j++){
+						bombCards.add(cards.get(i-j));
+					}
+					bombCardPatterns.add(factory.createCardPattern(bombCards));
+				}
+			}else{
+				value=cards.get(i).getValue();
+				color = cards.get(i).getColor();
+				cardsCount=0;
+			}
+			i++;
+		}
+		
+		return bombCardPatterns;
 	}
 }
 	
