@@ -1,6 +1,6 @@
 package commands.table.custom;
 
-import table.CustomTableManager;
+import table.CustomTable;
 import client.Client;
 import commands.Command;
 
@@ -11,7 +11,7 @@ public class SubscribeToCustomGames extends Command{
 	
 	@Override
 	public void execute(Client client, String... params) {
-		CustomTableManager.subscribeClient(client);	
+		CustomTable.subscribeClient(client);	
 	}
 
 	@Override

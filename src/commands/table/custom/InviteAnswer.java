@@ -1,4 +1,4 @@
-package commands.table;
+package commands.table.custom;
 
 import java.util.List;
 
@@ -23,10 +23,12 @@ public class InviteAnswer extends Command {
 	public void execute(Client client, String... params) {
 
 		
-		if (!InviteAnswer.enabled || params.length!=3)
+		if (params.length!=3)
 			return;
 		
-		CustomTable table = CustomTableManager.getCustomTable(params[1]);
+		String tableName=params[1]; 
+		
+		CustomTable table = CustomTable.getCustomTable(tableName);
 		if (table != null && table.isInvitationPending(client) && client.getTable()==null){
 			boolean reply = Boolean.parseBoolean(params[2]);
 			table.replyToInvitation(client, reply ? "Accepted" : "Declined");

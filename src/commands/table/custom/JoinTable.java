@@ -1,4 +1,4 @@
-package commands.table;
+package commands.table.custom;
 
 import table.CustomTable;
 import table.CustomTableManager;
@@ -15,7 +15,7 @@ public class JoinTable extends Command {
 	public void execute(Client client, String... params) {
 		String tableName= params[1];
 		if(client.getTable()!=null){
-			CustomTable table = CustomTableManager.getCustomTable(tableName);
+			CustomTable table = CustomTable.getCustomTable(tableName);
 			if(table!=null){
 				table.addObserver(client);
 			}

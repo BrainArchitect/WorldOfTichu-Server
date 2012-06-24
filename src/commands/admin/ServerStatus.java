@@ -1,5 +1,7 @@
 package commands.admin;
 
+import table.CustomTable;
+import table.RankedTable;
 import client.Client;
 import commands.Command;
 
@@ -10,12 +12,12 @@ public class ServerStatus extends Command {
 	
 	@Override
 	public void execute(Client client, String... params) {
-		/*int size[] = {Client.getClientsSize(), CustomTableManager.getCustomTablesSize(), TableManager.getRankedTablesSize() };
+		int size[] = {Client.getClientsSize(), CustomTable.getCustomTablesSize(), RankedTable.getRankedTablesSize() };
 		
 		String output = "";
 		for (int i=0; i<size.length; i++)
 			output += size[i] + "~";
-		client.send("69bR~" + output + "\n");*/
+		client.send("69bR~" + output + "\n");
 	}
 
 	@Override

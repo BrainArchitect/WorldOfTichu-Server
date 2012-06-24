@@ -6,6 +6,8 @@ import commands.admin.ServerStatus;
 import commands.contacts.*;
 import commands.table.*;
 import commands.table.custom.CreateTable;
+import commands.table.custom.InviteAnswer;
+import commands.table.custom.JoinTable;
 import commands.table.custom.SubscribeToCustomGames;
 import commands.table.custom.UnsubscribeToCustomGames;
 

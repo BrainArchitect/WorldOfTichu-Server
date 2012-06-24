@@ -14,7 +14,7 @@ public class CreateTable extends Command {
 	public void execute(Client client, String... params) {
 		String tableName = params[1];
 		if(!tableName.isEmpty()){
-			CustomTableManager.add(new CustomTable(tableName),client);
+			CustomTable.add(new CustomTable(tableName),client);
 		}
 
 	}
