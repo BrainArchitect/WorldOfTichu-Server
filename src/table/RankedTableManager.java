@@ -1,9 +1,9 @@
-package tablePackage;
+package table;
 
 
 import java.util.TreeSet;
 
-import clientPackage.Client;
+import client.Client;
 
 public class RankedTableManager {
 

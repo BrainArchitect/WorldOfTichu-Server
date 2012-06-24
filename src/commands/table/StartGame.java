@@ -1,7 +1,7 @@
 package commands.table;
 
-import tablePackage.*;
-import clientPackage.Client;
+import table.*;
+import client.Client;
 import commands.Command;
 
 public class StartGame extends Command {
@@ -13,7 +13,7 @@ public class StartGame extends Command {
 	public void execute(Client client, String... params) {
 
 		
-		CustomTable table = client.getTable();
+		Table table = client.getTable();
 		if(table!=null && !table.isStarted()){
 			table.startGame(client);
 		}

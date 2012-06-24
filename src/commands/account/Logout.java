@@ -2,11 +2,11 @@ package commands.account;
 
 import java.util.TreeSet;
 
-import tablePackage.CustomTableManager;
+import table.CustomTableManager;
 
 import commands.Command;
 
-import clientPackage.Client;
+import client.Client;
 
 public class Logout extends Command{
 

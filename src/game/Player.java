@@ -2,13 +2,13 @@ package game;
 
 import java.util.ArrayList;
 
-import mainPackage.Database;
+import main.Database;
 
-import tablePackage.CustomTable;
+import table.CustomTable;
 
 import cards.Card;
 import cards.CardPattern;
-import clientPackage.Client;
+import client.Client;
 
 public class Player {
 

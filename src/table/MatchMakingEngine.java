@@ -1,4 +1,4 @@
-package tablePackage;
+package table;
 
 
 public class MatchMakingEngine {

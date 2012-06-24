@@ -1,8 +1,8 @@
 package commands.table;
 
-import tablePackage.CustomTable;
-import tablePackage.CustomTable;
-import clientPackage.Client;
+
+import table.Table;
+import client.Client;
 import commands.Command;
 
 public class GetUp extends Command {
@@ -12,7 +12,7 @@ public class GetUp extends Command {
 	
 	@Override
 	public void execute(Client client, String... params) {
-		CustomTable t = client.getTable();
+		Table t = client.getTable();
 		if(t!=null){
 			t.smnGotUp(client);
 		}

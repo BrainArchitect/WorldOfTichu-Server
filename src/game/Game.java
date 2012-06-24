@@ -6,7 +6,7 @@ import java.util.Collections;
 import cards.Card;
 import cards.CardPattern;
 import cards.CardPatternFactory;
-import clientPackage.Client;
+import client.Client;
 
 public class Game {
 	

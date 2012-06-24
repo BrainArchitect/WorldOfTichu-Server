@@ -1,9 +1,9 @@
 package commands.contacts;
 
-import mainPackage.Database;
+import main.Database;
 import commands.Command;
 
-import clientPackage.Client;
+import client.Client;
 
 public class RemoveContact extends Command{
 

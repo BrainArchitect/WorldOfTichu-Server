@@ -1,7 +1,7 @@
 package commands.table;
 
-import tablePackage.CustomTable;
-import clientPackage.Client;
+import table.Table;
+import client.Client;
 import commands.Command;
 
 public class ForceGetUp extends Command {
@@ -19,7 +19,7 @@ public class ForceGetUp extends Command {
 	public void execute(Client client, String... params) {
 		Client forcedClient = Client.getClient(params[1]);
 		if (forcedClient != null){
-			CustomTable table = client.getTable();
+			Table table = client.getTable();
 			if (table != null){
 				table.smnGotUp(forcedClient);
 			}

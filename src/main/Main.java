@@ -1,8 +1,9 @@
-package mainPackage;
+package main;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import clientPackage.Client;
+
+import client.Client;
 
 
 

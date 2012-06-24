@@ -1,4 +1,4 @@
-package commPackage;
+package communication;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -8,7 +8,7 @@ import commands.Command;
 import commands.CommandFactory;
 import commands.account.Logout;
 
-import clientPackage.Client;
+import client.Client;
 
 public class ReaderThread extends Thread{
 

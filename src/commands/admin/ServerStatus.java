@@ -1,6 +1,6 @@
 package commands.admin;
 
-import clientPackage.Client;
+import client.Client;
 import commands.Command;
 
 public class ServerStatus extends Command {

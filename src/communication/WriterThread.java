@@ -1,11 +1,11 @@
-package commPackage;
+package communication;
 
 import java.io.PrintWriter;
 import java.net.Socket;
 
 import commands.account.Logout;
 
-import clientPackage.Client;
+import client.Client;
 
 public class WriterThread extends Thread {
 	

@@ -1,9 +1,9 @@
-package mainPackage;
+package main;
 
 import java.io.File;
 import java.util.Calendar;
 
-import clientPackage.Client;
+import client.Client;
 
 import commands.Command;
 

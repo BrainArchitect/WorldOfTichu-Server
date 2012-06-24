@@ -4,9 +4,9 @@ import java.util.TreeSet;
 
 import commands.Command;
 
-import mainPackage.Database;
-import clientPackage.Client;
-import clientPackage.Info;
+import main.Database;
+import client.Client;
+import client.Info;
 
 public class Login extends Command{
 

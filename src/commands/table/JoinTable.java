@@ -1,8 +1,8 @@
 package commands.table;
 
-import tablePackage.CustomTable;
-import tablePackage.CustomTableManager;
-import clientPackage.Client;
+import table.CustomTable;
+import table.CustomTableManager;
+import client.Client;
 import commands.Command;
 
 public class JoinTable extends Command {
@@ -11,11 +11,15 @@ public class JoinTable extends Command {
 	private static int counter = 0;
 	
 	@Override
+	//NEEDS FIX!!!!! MUST RUN FOR RANKED TABLES ALSO!!!!!
 	public void execute(Client client, String... params) {
 		String tableName= params[1];
-		CustomTable table = CustomTableManager.getCustomTable(tableName);
-		table.addObserver(client);
-
+		if(client.getTable()!=null){
+			CustomTable table = CustomTableManager.getCustomTable(tableName);
+			if(table!=null){
+				table.addObserver(client);
+			}
+		}
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 package commands.table.custom;
 
-import tablePackage.CustomTable;
-import tablePackage.CustomTableManager;
-import clientPackage.Client;
+import table.CustomTable;
+import table.CustomTableManager;
+import client.Client;
 import commands.Command;
 
 public class CreateTable extends Command {

@@ -1,7 +1,7 @@
 package commands.contacts;
 
 import commands.Command;
-import clientPackage.Client;
+import client.Client;
 
 public class ChatMessageToContact extends Command{
 

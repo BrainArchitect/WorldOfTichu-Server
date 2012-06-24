@@ -1,7 +1,7 @@
 package commands.table;
 
-import tablePackage.*;
-import clientPackage.Client;
+import table.*;
+import client.Client;
 import commands.Command;
 
 public class SendTableChatMessage extends Command {
@@ -12,7 +12,7 @@ public class SendTableChatMessage extends Command {
 	@Override
 	public void execute(Client client, String... params) {
 		String text = params[1];
-		CustomTable table = client.getTable();
+		Table table = client.getTable();
 		if(table!=null){
 			table.sendText(client, text);
 		}

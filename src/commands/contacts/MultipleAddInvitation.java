@@ -1,6 +1,6 @@
 package commands.contacts;
 
-import clientPackage.Client;
+import client.Client;
 import commands.Command;
 
 public class MultipleAddInvitation extends Command {

@@ -1,11 +1,11 @@
-package tablePackage;
+package table;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-import clientPackage.Client;
+import client.Client;
 
 public abstract class Table {
 

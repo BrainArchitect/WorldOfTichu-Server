@@ -2,9 +2,9 @@ package commands.contacts;
 
 import commands.Command;
 
-import mainPackage.Database;
-import clientPackage.Client;
-import clientPackage.Info;
+import main.Database;
+import client.Client;
+import client.Info;
 
 public class AddInvitation extends Command{
 

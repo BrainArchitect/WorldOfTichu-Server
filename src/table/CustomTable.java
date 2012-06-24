@@ -1,8 +1,8 @@
-package tablePackage;
+package table;
 
 import game.Player;
 
-import clientPackage.Client;
+import client.Client;
 
 public class CustomTable extends Table implements Comparable<CustomTable>{
 	

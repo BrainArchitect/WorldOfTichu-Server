@@ -3,9 +3,9 @@ package commands.table;
 import java.util.List;
 
 
-import tablePackage.CustomTable;
-import tablePackage.CustomTableManager;
-import clientPackage.Client;
+import table.CustomTable;
+import table.CustomTableManager;
+import client.Client;
 import commands.Command;
 
 public class InviteAnswer extends Command {

@@ -2,8 +2,8 @@ package commands.table;
 
 import java.util.List;
 
-import tablePackage.*;
-import clientPackage.Client;
+import table.*;
+import client.Client;
 import commands.Command;
 
 public class Invite extends Command {
@@ -17,7 +17,7 @@ public class Invite extends Command {
 		String userName = params[1];
 		String hostName = client.getInfo().getUsername();
 		Client invitedClient = Client.getClient(userName);
-		CustomTable table = client.getTable();
+		Table table = client.getTable();
 		
 		if(invitedClient!=null && table!=null){
 			if(table.inviteToTable(invitedClient)){

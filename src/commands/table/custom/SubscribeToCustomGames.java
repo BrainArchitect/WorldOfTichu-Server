@@ -1,7 +1,7 @@
 package commands.table.custom;
 
-import tablePackage.CustomTableManager;
-import clientPackage.Client;
+import table.CustomTableManager;
+import client.Client;
 import commands.Command;
 
 public class SubscribeToCustomGames extends Command{

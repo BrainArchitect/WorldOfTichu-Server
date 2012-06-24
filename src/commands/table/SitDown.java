@@ -1,7 +1,7 @@
 package commands.table;
 
-import tablePackage.*;
-import clientPackage.Client;
+import table.*;
+import client.Client;
 import commands.Command;
 
 public class SitDown extends Command {
@@ -12,7 +12,7 @@ public class SitDown extends Command {
 	@Override
 	public void execute(Client client, String... params) {
 		int sitNo = Integer.parseInt(params[1]);
-		CustomTable t = client.getTable();
+		Table t = client.getTable();
 
 		if(t!=null){
 			 t.smnSitDown(client, sitNo);

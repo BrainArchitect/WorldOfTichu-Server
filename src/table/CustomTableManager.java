@@ -1,9 +1,9 @@
-package tablePackage;
+package table;
 
 
 import java.util.TreeSet;
 
-import clientPackage.Client;
+import client.Client;
 
 public class CustomTableManager {
 
@@ -31,7 +31,7 @@ public class CustomTableManager {
 	}
 	
 	public static synchronized void unsubscribeClient(Client client){
-		CustomTable t = client.getTable();
+		Table t = client.getTable();
 		if(t!=null){
 			
 		}

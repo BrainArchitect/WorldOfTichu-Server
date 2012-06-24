@@ -2,7 +2,7 @@ package commands.admin;
 
 import java.io.File;
 
-import clientPackage.Client;
+import client.Client;
 
 import commands.Command;
 

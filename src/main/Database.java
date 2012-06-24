@@ -1,4 +1,4 @@
-package mainPackage;
+package main;
 
 import game.Statistics;
 
@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.Scanner;
 import java.util.TreeSet;
 
-import clientPackage.Info;
+import client.Info;
 
 
 public class Database {

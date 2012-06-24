@@ -1,4 +1,4 @@
-package clientPackage;
+package client;
 
 public class Info {
 

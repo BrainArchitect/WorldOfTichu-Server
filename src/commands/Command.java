@@ -1,6 +1,6 @@
 package commands;
 
-import clientPackage.Client;
+import client.Client;
 
 public abstract class Command {
 	
