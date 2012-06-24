@@ -1,11 +1,7 @@
 package game;
 
 import java.util.ArrayList;
-
 import main.Database;
-
-import table.CustomTable;
-
 import cards.Card;
 import cards.CardPattern;
 import client.Client;

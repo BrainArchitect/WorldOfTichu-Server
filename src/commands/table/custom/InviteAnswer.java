@@ -1,10 +1,7 @@
 package commands.table.custom;
 
 import java.util.List;
-
-
 import table.CustomTable;
-import table.CustomTableManager;
 import client.Client;
 import commands.Command;
 

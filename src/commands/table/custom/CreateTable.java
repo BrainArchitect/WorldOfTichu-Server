@@ -1,7 +1,6 @@
 package commands.table.custom;
 
 import table.CustomTable;
-import table.CustomTableManager;
 import client.Client;
 import commands.Command;
 

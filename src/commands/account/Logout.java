@@ -3,10 +3,7 @@ package commands.account;
 import java.util.TreeSet;
 
 import table.CustomTable;
-import table.CustomTableManager;
-
 import commands.Command;
-
 import client.Client;
 
 public class Logout extends Command{
