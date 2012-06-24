@@ -1,7 +1,7 @@
 package commands.customGame;
 
 import tablePackage.CustomTable;
-import tablePackage.TableManager;
+import tablePackage.CustomTableManager;
 import clientPackage.Client;
 import commands.Command;
 
@@ -14,7 +14,7 @@ public class CreateTable extends Command {
 	public void execute(Client client, String... params) {
 		String tableName = params[1];
 		if(!tableName.isEmpty()){
-			TableManager.addCustomTable(new CustomTable(tableName),client);
+			CustomTableManager.addCustomTable(new CustomTable(tableName),client);
 		}
 
 	}

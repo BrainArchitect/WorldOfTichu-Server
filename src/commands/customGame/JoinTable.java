@@ -1,7 +1,7 @@
 package commands.customGame;
 
 import tablePackage.CustomTable;
-import tablePackage.TableManager;
+import tablePackage.CustomTableManager;
 import clientPackage.Client;
 import commands.Command;
 
@@ -13,7 +13,7 @@ public class JoinTable extends Command {
 	@Override
 	public void execute(Client client, String... params) {
 		String tableName= params[1];
-		CustomTable table = TableManager.getCustomTable(tableName);
+		CustomTable table = CustomTableManager.getCustomTable(tableName);
 		table.addObserver(client);
 
 	}

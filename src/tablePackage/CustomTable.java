@@ -86,7 +86,7 @@ public class CustomTable implements Comparable<CustomTable>{
 			
 			if(success){
 				c.setTable(this);
-				TableManager.unsubscribeClientToCustomGame(c);
+				CustomTableManager.unsubscribeClientToCustomGame(c);
 				
 				//Send message with the table details to the observer that have now joined this table
 				//*************************************************************************************************
@@ -129,7 +129,7 @@ public class CustomTable implements Comparable<CustomTable>{
 			this.sendMessageBut("3f2R~"+client.getInfo().getUsername()+"~\n", client);
 		}else{
 			if(seatedClients[0]==client){
-					TableManager.removeCustomTable(this);
+					CustomTableManager.removeCustomTable(this);
 					this.sendMessage("3k1R~\n");
 					for(int sitNo=0;sitNo<4;sitNo++){
 						if(seatedClients[sitNo]!=null){
@@ -170,7 +170,7 @@ public class CustomTable implements Comparable<CustomTable>{
 
 							
 		if(seatedClients[sitNo]==null && doesNotSitAnyWhere(c)){
-			TableManager.unsubscribeClientToCustomGame(c);
+			CustomTableManager.unsubscribeClientToCustomGame(c);
 			
 
 			observers.remove(c);
@@ -180,7 +180,7 @@ public class CustomTable implements Comparable<CustomTable>{
 			this.sendMessage(message);
 
 			message = "3uR~"+id+"~"+this.getNumOfPlayers()+"~\n";
-			TableManager.tableValuesUpdated(message);
+			CustomTableManager.tableValuesUpdated(message);
 
 			return true;
 		}
@@ -196,7 +196,7 @@ public class CustomTable implements Comparable<CustomTable>{
 				observers.add(c);
 				seatedClients[sitNo]= null;
 				this.sendMessage("3eR~"+sitNo+"~"+c.getInfo().getUsername()+"~\n");
-				TableManager.tableValuesUpdated("3uR~"+id+"~"+this.getNumOfPlayers()+"~\n");
+				CustomTableManager.tableValuesUpdated("3uR~"+id+"~"+this.getNumOfPlayers()+"~\n");
 				return true;
 			}
 		}
@@ -288,11 +288,11 @@ public class CustomTable implements Comparable<CustomTable>{
 		return true;
 	}
 
-	public Client[] getPlayers() {
+	public Client[] getClients() {
 		return seatedClients;
 	}
 	
-	public Client getPlayer(int seatNo) {
+	public Client getClient(int seatNo) {
 		if((seatNo<0) || (seatNo>3)){
 			return null;
 		}

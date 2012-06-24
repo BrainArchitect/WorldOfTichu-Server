@@ -2,7 +2,7 @@ package commands.account;
 
 import java.util.TreeSet;
 
-import tablePackage.TableManager;
+import tablePackage.CustomTableManager;
 
 import commands.Command;
 
@@ -37,7 +37,7 @@ public class Logout extends Command{
 		}		
 		
 		Client.removeClient(client);
-		TableManager.unsubscribeClientToCustomGame(client);
+		CustomTableManager.unsubscribeClientToCustomGame(client);
 		client.close();	
 
 	}

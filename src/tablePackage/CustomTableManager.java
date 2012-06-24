@@ -5,13 +5,11 @@ import java.util.TreeSet;
 
 import clientPackage.Client;
 
-public class TableManager {
+public class CustomTableManager {
 
 	private static TreeSet<CustomTable> customTables = new TreeSet<CustomTable>();
 	private static TreeSet<Client> customGameSubscribers = new TreeSet<Client>();
-	
-	//private static TreeSet<RankedTable> rankedTables = new TreeSet<RankedTable>();
-	//private static TreeSet<Client> rankedGameSubscribers = new TreeSet<Client>(); 
+
 	
 	
 	public static synchronized boolean subscribeClientToCustomGame(Client client){
@@ -53,7 +51,7 @@ public class TableManager {
 		if(success){
 			table.addHost(host);
 			host.send("3b1R~"+table.getID()+"~"+host.getInfo().getUsername()+"~\n");
-			TableManager.unsubscribeClientToCustomGame(host);
+			CustomTableManager.unsubscribeClientToCustomGame(host);
 			for(Client c: customGameSubscribers){
 				c.send("3b2R~"+table.getID()+"~1~\n");
 			}
@@ -96,6 +94,6 @@ public class TableManager {
 	}
 
 	public static int getCustomTablesSize(){ return customTables.size(); }
-	//public static int getRankedTablesSize(){ return rankedTables.size(); }
+
 	
 }
