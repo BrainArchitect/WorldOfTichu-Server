@@ -1,37 +1,38 @@
-package commands.customGame;
+package commands.table;
 
-import tablePackage.CustomTable;
+import tablePackage.*;
 import clientPackage.Client;
 import commands.Command;
 
-public class LeaveTable extends Command {
+public class SendTableChatMessage extends Command {
 
 	private static boolean enabled = true;
 	private static int counter = 0;
 	
 	@Override
 	public void execute(Client client, String... params) {
-		CustomTable t = client.getTable();
-		if(t!=null){
-			 t.remove(client);
+		String text = params[1];
+		CustomTable table = client.getTable();
+		if(table!=null){
+			table.sendText(client, text);
 		}
-		
 
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return LeaveTable.enabled;
+		return SendTableChatMessage.enabled;
 	}
 
 	@Override
 	public void setEnabled(boolean enabled) {
-		LeaveTable.enabled = enabled;
+		SendTableChatMessage.enabled = enabled;
 	}
+
 
 	@Override
 	public String getCode() {
-		return "3f";
+		return "3i";
 	}
 
 	@Override

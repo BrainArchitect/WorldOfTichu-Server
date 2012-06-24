@@ -4,7 +4,10 @@ import commands.account.*;
 import commands.admin.ListCommands;
 import commands.admin.ServerStatus;
 import commands.contacts.*;
-import commands.customGame.*;
+import commands.table.*;
+import commands.table.custom.CreateTable;
+import commands.table.custom.SubscribeToCustomGames;
+import commands.table.custom.UnsubscribeToCustomGames;
 
 public class CommandFactory {
 

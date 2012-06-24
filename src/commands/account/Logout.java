@@ -37,7 +37,7 @@ public class Logout extends Command{
 		}		
 		
 		Client.removeClient(client);
-		CustomTableManager.unsubscribeClientToCustomGame(client);
+		CustomTableManager.unsubscribeClient(client);
 		client.close();	
 
 	}

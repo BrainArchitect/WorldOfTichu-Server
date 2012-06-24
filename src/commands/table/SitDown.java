@@ -1,37 +1,38 @@
-package commands.customGame;
+package commands.table;
 
-import tablePackage.CustomTable;
-import tablePackage.CustomTable;
+import tablePackage.*;
 import clientPackage.Client;
 import commands.Command;
 
-public class GetUp extends Command {
+public class SitDown extends Command {
 
 	private static boolean enabled = true;
 	private static int counter = 0;
 	
 	@Override
 	public void execute(Client client, String... params) {
+		int sitNo = Integer.parseInt(params[1]);
 		CustomTable t = client.getTable();
+
 		if(t!=null){
-			t.smnGotUp(client);
+			 t.smnSitDown(client, sitNo);
 		}
 	}
 
 	@Override
-	public void setEnabled(boolean enabled) {
-		GetUp.enabled = enabled;
+	public boolean isEnabled() {
+		return SitDown.enabled;
 	}
 
 	@Override
-	public boolean isEnabled() {
-		return GetUp.enabled;
+	public void setEnabled(boolean enabled) {
+		SitDown.enabled = enabled;
 	}
 
 
 	@Override
 	public String getCode() {
-		return "3e";
+		return "3d";
 	}
 
 	@Override
@@ -43,5 +44,4 @@ public class GetUp extends Command {
 	public long getCounter() {
 		return counter;
 	}
-
 }

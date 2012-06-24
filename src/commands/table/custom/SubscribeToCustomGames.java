@@ -1,38 +1,34 @@
-package commands.customGame;
+package commands.table.custom;
 
-import tablePackage.CustomTable;
 import tablePackage.CustomTableManager;
 import clientPackage.Client;
 import commands.Command;
 
-public class JoinTable extends Command {
+public class SubscribeToCustomGames extends Command{
 
 	private static boolean enabled = true;
 	private static int counter = 0;
 	
 	@Override
 	public void execute(Client client, String... params) {
-		String tableName= params[1];
-		CustomTable table = CustomTableManager.getCustomTable(tableName);
-		table.addObserver(client);
-
-	}
-
-	@Override
-	public void setEnabled(boolean enabled) {
-		JoinTable.enabled = enabled;
+		CustomTableManager.subscribeClient(client);	
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return JoinTable.enabled;
+		return SubscribeToCustomGames.enabled;
+	}
+
+	@Override
+	public void setEnabled(boolean enabled) {
+		SubscribeToCustomGames.enabled = enabled;
 	}
 
 	@Override
 	public String getCode() {
-		return "3c";
+		return "3a";
 	}
-	
+
 	@Override
 	public void increaseCounter() {
 		counter++;
@@ -42,4 +38,5 @@ public class JoinTable extends Command {
 	public long getCounter() {
 		return counter;
 	}
+
 }

@@ -1,4 +1,4 @@
-package commands.customGame;
+package commands.table.custom;
 
 import tablePackage.CustomTableManager;
 import clientPackage.Client;
@@ -11,7 +11,7 @@ public class UnsubscribeToCustomGames extends Command {
 	
 	@Override
 	public void execute(Client client, String... params) {
-		CustomTableManager.unsubscribeClientToCustomGame(client);
+		CustomTableManager.unsubscribeClient(client);
 	}
 
 	@Override

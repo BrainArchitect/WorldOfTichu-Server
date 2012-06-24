@@ -1,4 +1,4 @@
-package commands.customGame;
+package commands.table;
 
 import java.util.List;
 

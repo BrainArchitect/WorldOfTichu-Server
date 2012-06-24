@@ -1,38 +1,37 @@
-package commands.customGame;
+package commands.table;
 
-import tablePackage.*;
+import tablePackage.CustomTable;
+import tablePackage.CustomTable;
 import clientPackage.Client;
 import commands.Command;
 
-public class SendTableChatMessage extends Command {
+public class GetUp extends Command {
 
 	private static boolean enabled = true;
 	private static int counter = 0;
 	
 	@Override
 	public void execute(Client client, String... params) {
-		String text = params[1];
-		CustomTable table = client.getTable();
-		if(table!=null){
-			table.sendText(client, text);
+		CustomTable t = client.getTable();
+		if(t!=null){
+			t.smnGotUp(client);
 		}
-
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return SendTableChatMessage.enabled;
 	}
 
 	@Override
 	public void setEnabled(boolean enabled) {
-		SendTableChatMessage.enabled = enabled;
+		GetUp.enabled = enabled;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return GetUp.enabled;
 	}
 
 
 	@Override
 	public String getCode() {
-		return "3i";
+		return "3e";
 	}
 
 	@Override
@@ -44,4 +43,5 @@ public class SendTableChatMessage extends Command {
 	public long getCounter() {
 		return counter;
 	}
+
 }

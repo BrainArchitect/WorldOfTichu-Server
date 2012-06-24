@@ -1,38 +1,37 @@
-package commands.customGame;
+package commands.table;
 
-import tablePackage.*;
+import tablePackage.CustomTable;
 import clientPackage.Client;
 import commands.Command;
 
-public class StartGame extends Command {
+public class LeaveTable extends Command {
 
 	private static boolean enabled = true;
 	private static int counter = 0;
 	
 	@Override
 	public void execute(Client client, String... params) {
-
-		
-		CustomTable table = client.getTable();
-		if(table!=null && !table.isStarted()){
-			table.startGame(client);
+		CustomTable t = client.getTable();
+		if(t!=null){
+			 t.remove(client);
 		}
+		
+
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return StartGame.enabled;
+		return LeaveTable.enabled;
 	}
 
 	@Override
 	public void setEnabled(boolean enabled) {
-		StartGame.enabled = enabled;
+		LeaveTable.enabled = enabled;
 	}
-
 
 	@Override
 	public String getCode() {
-		return "3j";
+		return "3f";
 	}
 
 	@Override

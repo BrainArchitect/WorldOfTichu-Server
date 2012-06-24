@@ -1,32 +1,38 @@
-package commands.customGame;
+package commands.table;
 
-import tablePackage.CustomTableManager;
+import tablePackage.*;
 import clientPackage.Client;
 import commands.Command;
 
-public class SubscribeToCustomGames extends Command{
+public class StartGame extends Command {
 
 	private static boolean enabled = true;
 	private static int counter = 0;
 	
 	@Override
 	public void execute(Client client, String... params) {
-		CustomTableManager.subscribeClientToCustomGame(client);	
+
+		
+		CustomTable table = client.getTable();
+		if(table!=null && !table.isStarted()){
+			table.startGame(client);
+		}
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return SubscribeToCustomGames.enabled;
+		return StartGame.enabled;
 	}
 
 	@Override
 	public void setEnabled(boolean enabled) {
-		SubscribeToCustomGames.enabled = enabled;
+		StartGame.enabled = enabled;
 	}
+
 
 	@Override
 	public String getCode() {
-		return "3a";
+		return "3j";
 	}
 
 	@Override
@@ -38,5 +44,4 @@ public class SubscribeToCustomGames extends Command{
 	public long getCounter() {
 		return counter;
 	}
-
 }

@@ -12,7 +12,7 @@ public class CustomTableManager {
 
 	
 	
-	public static synchronized boolean subscribeClientToCustomGame(Client client){
+	public static synchronized boolean subscribeClient(Client client){
 		boolean success = customGameSubscribers.add(client);
 		
 		if(success){
@@ -30,7 +30,7 @@ public class CustomTableManager {
 		return success;
 	}
 	
-	public static synchronized void unsubscribeClientToCustomGame(Client client){
+	public static synchronized void unsubscribeClient(Client client){
 		CustomTable t = client.getTable();
 		if(t!=null){
 			
@@ -38,7 +38,7 @@ public class CustomTableManager {
 		customGameSubscribers.remove(client);
 	}
 	
-	public static synchronized boolean addCustomTable(CustomTable table, Client host){
+	public static synchronized boolean add(CustomTable table, Client host){
 		//If host has already a table 
 		if(host.getTable()!=null){
 			//then he cannot create another.
@@ -51,7 +51,7 @@ public class CustomTableManager {
 		if(success){
 			table.addHost(host);
 			host.send("3b1R~"+table.getID()+"~"+host.getInfo().getUsername()+"~\n");
-			CustomTableManager.unsubscribeClientToCustomGame(host);
+			CustomTableManager.unsubscribeClient(host);
 			for(Client c: customGameSubscribers){
 				c.send("3b2R~"+table.getID()+"~1~\n");
 			}
@@ -63,7 +63,7 @@ public class CustomTableManager {
 		return success;
 	}
 	
-	public static synchronized void removeCustomTable(CustomTable table){
+	public static synchronized void remove(CustomTable table){
 		customTables.remove(table);
 		for(Client tempClient : customGameSubscribers){
 			tempClient.send("3k2R~"+table.getID()+"~\n");
@@ -71,9 +71,9 @@ public class CustomTableManager {
 	}
 	
 	
-	//public static synchronized TreeSet<CustomTable> getCustomTables(){
-		//return customTables;
-	//}
+	public static synchronized TreeSet<CustomTable> getCustomTables(){
+		return customTables;
+	}
 	
 	
 	public static synchronized CustomTable getCustomTable(String tableName){

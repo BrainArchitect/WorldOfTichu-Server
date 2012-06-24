@@ -1,38 +1,38 @@
-package commands.customGame;
+package commands.table.custom;
 
-import tablePackage.*;
+import tablePackage.CustomTable;
+import tablePackage.CustomTableManager;
 import clientPackage.Client;
 import commands.Command;
 
-public class SitDown extends Command {
+public class CreateTable extends Command {
 
 	private static boolean enabled = true;
 	private static int counter = 0;
 	
 	@Override
 	public void execute(Client client, String... params) {
-		int sitNo = Integer.parseInt(params[1]);
-		CustomTable t = client.getTable();
-
-		if(t!=null){
-			 t.smnSitDown(client, sitNo);
+		String tableName = params[1];
+		if(!tableName.isEmpty()){
+			CustomTableManager.add(new CustomTable(tableName),client);
 		}
-	}
 
-	@Override
-	public boolean isEnabled() {
-		return SitDown.enabled;
 	}
 
 	@Override
 	public void setEnabled(boolean enabled) {
-		SitDown.enabled = enabled;
+		CreateTable.enabled = enabled;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return CreateTable.enabled;
 	}
 
 
 	@Override
 	public String getCode() {
-		return "3d";
+		return "3b";
 	}
 
 	@Override
