@@ -35,18 +35,35 @@ public class AddInvitation extends Command{
 	public void execute(Client sourceClient, String... params) {
 		
 		String targetUsername = params[1];
+		String sourceUsername = sourceClient.getInfo().getUsername();
+				
 		
 		String response = "2aR~";
 		
 		Info targetBuddyInfo = Database.loadInfo(targetUsername);
 		if(targetBuddyInfo!=null){
-			if(Database.hasFriendship(sourceClient.getInfo().getUsername(), targetBuddyInfo.getUsername())){
-				response += "false~You are already friend with "+ targetBuddyInfo.getUsername()+".~\n";
+			if(Database.hasFriendship(sourceUsername, targetUsername)){
+				response += "false~You are already friend with "+ targetUsername+".~\n";
 				sourceClient.send(response);
 				return;
 			}
-			if(!Database.addInvitation(sourceClient.getInfo().getUsername(), targetBuddyInfo.getUsername()))
+			if(!Database.addInvitation(sourceUsername, targetUsername))
 				return;
+			
+			if(Database.hasInvitation(targetUsername, sourceUsername)){
+				Database.deleteInvitation(targetUsername, sourceUsername);
+				Database.deleteInvitation(sourceUsername, targetUsername);
+				Database.addFriendship(targetUsername, sourceUsername);
+				Client targetClient = Client.getClient(targetUsername);
+				if(targetClient != null){
+					response = "2a2R~" + sourceUsername + "~true~\n";
+					targetClient.send(response);
+				}
+				response = "2a2R~" + targetUsername + "~true~\n";
+				sourceClient.send(response);
+				return;
+			}
+			
 			response += "true~\n";
 			sourceClient.send(response);
 		}else{
@@ -54,6 +71,7 @@ public class AddInvitation extends Command{
 			sourceClient.send(response);
 			return;
 		}
+		
 		
 		Client targetClient = Client.getClient(targetUsername);
 		if(targetClient != null){
