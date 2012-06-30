@@ -245,13 +245,20 @@ public class Game {
 	
 
 
-	public synchronized void makeAWish(int seatNo, String value){
-
+	public synchronized void makeAWish(int seatNo, int value){
+		wishNumber = value;
+		wishActivated = true;
 	}
 	
 	public synchronized void bomb(int seatNo){
-
+		if(hasBomb(players[seatNo].getCardsAtHand()).size()!=0){
+			nextPlayerSeat = seatNo;
+			//give turn for bombing
+		}
 	}	
+	
+	
+	
 	
 	public synchronized void incrementPasses(int seatNo){
 		passes ++;
@@ -512,6 +519,10 @@ public class Game {
 			
 		}else if(lastPlayedCardPattern.isSuccessivePairsCardPattern()){
 
+			
+		}else if(lastPlayedCardPattern.isFullHouseCardPattern()){
+			
+		}else if(lastPlayedCardPattern.isStraightCardPattern()){
 			
 		}
 		

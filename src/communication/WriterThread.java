@@ -2,6 +2,7 @@ package communication;
 
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Timer;
 
 import commands.account.Logout;
 
@@ -38,7 +39,7 @@ public class WriterThread extends Thread {
 					if(client.getInfo()!=null){
 						System.out.println("Message: "+ messageToSend + "send to: " + client.getInfo().getUsername());
 					}
-					out.flush();		
+					out.flush();
 					if (out.checkError())
 						throw new Exception("Error while sending to client.");
 				}

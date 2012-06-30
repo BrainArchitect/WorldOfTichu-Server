@@ -25,9 +25,6 @@ public abstract class Table {
 	
 	
 	
-	
-	
-	
 	public abstract void startGame(Client c);
 	public abstract boolean addHost(Client c);
 
@@ -71,7 +68,6 @@ public abstract class Table {
 			boolean success = observers.add(c);
 			
 			if(success){
-			
 				//Send message with the table details to the observer that have now joined this table
 				//*************************************************************************************************
 				String msgTableDetails="3c1R~"+id+"~"+ c.getInfo().getUsername() +"~"+getNumOfPlayers()+"~"+observers.size()+"~"+invitations.size()+"~";

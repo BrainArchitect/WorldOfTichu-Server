@@ -256,10 +256,14 @@ public class Database {
 		Info okan = new Info("okan", "123456", "okan@gmail.com", "Apo To Pouthena", "01012011");
 		Info gio = new Info("gio", "123456", "gio@gmail.com", "Apo Allo Simpan", "01012011");
 		Info tasos = new Info("tasos", "123456", "tasos@gmail.com", "Apo To Mellon", "01012011");
+		Info dolofonos = new Info("dolofonos", "123456", "dolofonos@gmail.com", "Apo Tin Kolasi", "01012011");
+		Info yoyo = new Info("yoyo", "123456", "yoyo@gmail.com", "Apo Paidia", "01012011");
 		
 		registerInfo(filotas);
 		registerInfo(okan);
 		registerInfo(gio);
+		registerInfo(dolofonos);
+		registerInfo(yoyo);
 		registerInfo(tasos);
 		
 		addFriendship("filotas", "tasos");

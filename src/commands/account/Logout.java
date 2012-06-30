@@ -3,6 +3,7 @@ package commands.account;
 import java.util.TreeSet;
 
 import table.CustomTable;
+import table.Table;
 import commands.Command;
 import client.Client;
 
@@ -36,6 +37,10 @@ public class Logout extends Command{
 		
 		Client.removeClient(client);
 		CustomTable.unsubscribeClient(client);
+		Table table = client.getTable();
+		if(table!=null && !table.isStarted() && table.getClient(0)==client){
+			CustomTable.remove((CustomTable) table);
+		}
 		client.close();	
 
 	}

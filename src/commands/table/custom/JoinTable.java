@@ -13,7 +13,7 @@ public class JoinTable extends Command {
 	//NEEDS FIX!!!!! MUST RUN FOR RANKED TABLES ALSO!!!!!
 	public void execute(Client client, String... params) {
 		String tableName= params[1];
-		if(client.getTable()!=null){
+		if(client.getTable()==null){
 			CustomTable table = CustomTable.getCustomTable(tableName);
 			if(table!=null){
 				table.addObserver(client);

@@ -191,4 +191,8 @@ public class Client implements Comparable<Client>{
 		}
 
 	}
+	
+	public WriterThread getWriterThread(){
+		return writerThread;
+	}
 }

@@ -119,10 +119,6 @@ public class CustomTable extends Table implements Comparable<CustomTable>{
 	}
 	
 	public static synchronized void unsubscribeClient(Client client){
-		Table t = client.getTable();
-		if(t!=null){
-			
-		}
 		customGameSubscribers.remove(client);
 	}
 	
@@ -157,6 +153,7 @@ public class CustomTable extends Table implements Comparable<CustomTable>{
 			tempClient.send("3k2R~"+table.getID()+"~\n");
 		}
 	}
+	
 	
 	
 	public static synchronized TreeSet<CustomTable> getCustomTables(){
