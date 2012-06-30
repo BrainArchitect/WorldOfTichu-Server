@@ -77,10 +77,10 @@ public class CustomTable extends Table implements Comparable<CustomTable>{
 
 	
 	public void startGame(Client c){
-		if(getClient(0)==c && this.getNumOfPlayers()==4){
+		if(getClient(0)==c && this.getNumOfPlayers()==SIZE){
 			setStarted(true);
-			Player[] players = new Player[4];
-			for(int i=0; i<4;i++){
+			Player[] players = new Player[SIZE];
+			for(int i=0; i<SIZE;i++){
 				players[i] = getClient(i).getPlayer();
 			}
 			sendMessage("3jR~\n");

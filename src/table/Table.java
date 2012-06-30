@@ -13,14 +13,14 @@ public abstract class Table {
 	private TreeSet<Invitation> invitations = new TreeSet<Invitation>();
 	private boolean started; 
 	
-
+	protected final int SIZE = 4;
 	private String id;
 	
 	
 	public Table(String identifier){
 		this.id = identifier;
 		this.started = false;
-		this.seatedClients = new Client[4];
+		this.seatedClients = new Client[SIZE];
 	}
 	
 	
@@ -34,7 +34,7 @@ public abstract class Table {
 	
 	
 	public boolean smnGotUp(Client c){
-		for(int sitNo=0; sitNo<4; sitNo++){
+		for(int sitNo=0; sitNo<SIZE; sitNo++){
 			if(getClient(sitNo)==c){
 				observers.add(c);
 				seatedClients[sitNo]= null;
@@ -47,7 +47,7 @@ public abstract class Table {
 	}
 	
 	public boolean smnSitDown(Client c, int sitNo){
-		if(sitNo<0 || sitNo>3 || c==null){
+		if(sitNo<0 || sitNo>=SIZE || c==null){
 			return false;
 		}
 		
@@ -75,7 +75,7 @@ public abstract class Table {
 				//Send message with the table details to the observer that have now joined this table
 				//*************************************************************************************************
 				String msgTableDetails="3c1R~"+id+"~"+ c.getInfo().getUsername() +"~"+getNumOfPlayers()+"~"+observers.size()+"~"+invitations.size()+"~";
-				for(int sitNo=0;sitNo<4;sitNo++){
+				for(int sitNo=0;sitNo<SIZE;sitNo++){
 					if(seatedClients[sitNo]!=null){
 						msgTableDetails = msgTableDetails + sitNo +"~"+ seatedClients[sitNo].getInfo().getUsername()+"~";
 					}
@@ -115,7 +115,7 @@ public void remove(Client client){
 		}else{
 			if(seatedClients[0]==client){
 					this.sendMessage("3k1R~\n");
-					for(int sitNo=0;sitNo<4;sitNo++){
+					for(int sitNo=0;sitNo<SIZE;sitNo++){
 						if(seatedClients[sitNo]!=null){
 							seatedClients[sitNo].setTable(null);
 						}
@@ -125,7 +125,7 @@ public void remove(Client client){
 					}
 				
 			}else{
-				for(int sitNo=1;sitNo<4;sitNo++){
+				for(int sitNo=1;sitNo<SIZE;sitNo++){
 					if(seatedClients[sitNo]== client){
 						seatedClients[sitNo]=null;
 						success =true;
@@ -216,7 +216,7 @@ public void remove(Client client){
 
 	
 	public void setClient(Client c, int seatNo) {
-		if((seatNo<0) || (seatNo>3)){
+		if((seatNo>=0) && (seatNo<SIZE)){
 			seatedClients[seatNo]=c;
 		}
 	}
