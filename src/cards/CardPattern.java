@@ -39,6 +39,8 @@ public abstract class CardPattern implements Comparable<CardPattern>{
 	 * 
 	 * Returns >0 if THIS is the Winning pattern
 	 * Returns <=0 if THIS is the Losing pattern
+	 * 
+	 * OTHER is the Trick.
 	 */
 	public int compareTo(CardPattern other){
 
